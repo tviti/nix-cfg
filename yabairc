@@ -40,4 +40,13 @@ yabai -m config left_padding                 20
 yabai -m config right_padding                20
 yabai -m config window_gap                   10
 
+# Fix for getting Emacs to play nicely w/ Yabai, per
+# https://github.com/koekeishiya/yabai/issues/86
+# NOTE: This also requires that menu-bar-mode be enabled
+# Is this actually necessary? Seems to work OK w/out it!
+yabai -m rule --add app=Emacs manage=on
+
+# Don't fuck w/ system preference windows
+yabai -m rule --add app="^System Preferences$" manage=off
+
 echo "yabai configuration loaded.."
