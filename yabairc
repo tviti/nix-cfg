@@ -49,4 +49,7 @@ yabai -m rule --add app=Emacs manage=on
 # Don't fuck w/ system preference windows
 yabai -m rule --add app="^System Preferences$" manage=off
 
+# Don't try to manage the microsoft auto-update windows when they take focus
+yabai -m rule --add app="^Microsoft AutoUpdate$" manage=off
+
 echo "yabai configuration loaded.."
