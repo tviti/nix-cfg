@@ -1,3 +1,5 @@
+export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
+
 # TODO: Use Nix conda so we don't have to deal with this shit anymore.
 # added by Anaconda2 5.0.0 installer
 # export PATH="/Users/taylor/anaconda2/bin:$PATH"  # commented out by conda initialize
