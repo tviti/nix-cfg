@@ -19,6 +19,8 @@ in rec {
       pkgs.pass
 
       python-with-my-packages
+      pkgs.pandoc
+      pkgs.haskellPackages.pandoc-citeproc
     ];
 
     sessionVariables = {
