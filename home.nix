@@ -1,13 +1,7 @@
 { config, pkgs, ... }:
 
 let home_directory = builtins.getEnv "HOME";
-    my-python-packages = python-packages: with python-packages; [
-      # Things for Nex
-      # TODO: Move to a seperate package?
-      pyqt5
-      pyqtwebengine
-    ];
-    python-with-my-packages = pkgs.python3.withPackages my-python-packages;
+    next = import ./next/default.nix;
 in rec {
   home = {
     packages = [
@@ -17,10 +11,16 @@ in rec {
       pkgs.aspellDicts.en-computers
       pkgs.aspellDicts.en-science
       pkgs.pass
-
-      python-with-my-packages
+      pkgs.curl
+      
       pkgs.pandoc
       pkgs.haskellPackages.pandoc-citeproc
+
+      # pkgs.dbus
+      # pkgs.dbus_daemon
+      # pkgs.dbus_libs
+      pkgs.qt5.qtbase
+      next
     ];
 
     sessionVariables = {
