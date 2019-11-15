@@ -17,9 +17,8 @@ in stdenv.mkDerivation rec {
     sha256 = "0ba7i7yn6ya7qdc768z4z23x2zyq78w67pgs6abav2jyxp83qy2n";
   };
 
-  # builder = "${bash}/bin/bash";
-  # args = [ ./builder.sh ];
-  builder = ./builder.sh;
+  builder = "${bash}/bin/bash";
+  args = [ ./builder.sh ];
 
   # Stripping destroys the generated SBCL image
   dontStrip = true;

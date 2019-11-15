@@ -16,11 +16,11 @@ virtualenv ${nextvenv}
 source ${nextvenv}/bin/activate
 pip install pyqt5 PyQtWebEngine
 
-
 export HOME=$TMP
 make app-bundle
 mkdir ${out}/Applications
 cp -r ./Next.app ${out}/Applications/Next.app
-# make DESTDIR=${out} install
+mkdir ${out}/bin
+ln -s ${out}/Applications/Next.app/Contents/MacOS/next ${out}/bin/next
 
 
