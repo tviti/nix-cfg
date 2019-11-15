@@ -46,7 +46,13 @@ in rec {
     configHome = "${home_directory}/.config";
 
     configFile."aspell/config".text = ''
-      home-dir ${home_directory}/Sync;
+      dict-dir ${home_directory}/.nix-profile/lib/aspell
+      home-dir ${home_directory}/Sync
+      personal /Users/taylor/Sync/.aspell.en.pws
+
+      master en_US
+      extra-dicts en_US-science.rws
+      add-extra-dicts en-computers.rws
     '';
   };
   
