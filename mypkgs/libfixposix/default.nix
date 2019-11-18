@@ -1,16 +1,17 @@
-# This file is basically a transliteration of the brew recipe for libfixposix.
-# For some reason, the one in nixpkgs doesn't support darwin, so I rolled my own.
+{ pkgs, stdenv, fetchFromGitHub, autoreconfHook, pkgconfig }:
 
-with import <nixpkgs> {};
 stdenv.mkDerivation rec {
-  name = "libfixposix";
+  pname = "libfixposix";
   version = "0.4.3";
 
-  src = fetchurl {
-    url = "https://github.com/sionescu/libfixposix/archive/v${version}.tar.gz";
-    sha256 = "78fe8bcebf496520ac29b5b65049f5ec1977c6bd956640bdc6d1da6ea04d8504";
+  src = fetchFromGitHub {
+    owner = "sionescu";
+    repo = "libfixposix";
+    rev = "v${version}";
+    sha256 = "1x4q6yspi5g2s98vq4qszw4z3zjgk9l5zs8471w4d4cs6l97w08j";
   };
 
+  # Taken from the libfixposix brew recipe
   configurePhase = ''
     autoreconf -fvi
     ./configure --disable-dependency-tracking \
@@ -18,9 +19,15 @@ stdenv.mkDerivation rec {
                 --prefix=$out
   '';
 
-  buildInputs = [ autoconf automake libtool pkg-config git getconf ];
+  nativeBuildInputs = [ autoreconfHook pkgconfig ];
+  buildInputs = with pkgs; [ git getconf ];
 
-  installPhase = ''
-    make install
-  '';
+
+  meta = with stdenv.lib; {
+    homepage = https://github.com/sionescu/libfixposix;
+    description = "Thin wrapper over POSIX syscalls and some replacement functionality";
+    license = licenses.boost;
+    platforms = platforms.darwin;
+  };
+
 }

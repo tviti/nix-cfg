@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let home_directory = builtins.getEnv "HOME";
-    next = import ./mypkgs/next/default.nix;
+    next = pkgs.callPackage ./mypkgs/next { };
 in rec {
   home = {
     packages = [

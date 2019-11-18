@@ -1,6 +1,8 @@
-with import <nixpkgs> {};
+{ pkgs, ... }:
+
+with pkgs;
 let
-  libfixposix = import ../libfixposix/default.nix;
+  libfixposix = pkgs.callPackage ../libfixposix { };
 in stdenv.mkDerivation rec {
   name = "next-pyqt";
   version = "9d65598a0911a09e3befcad65444763a51527913";
