@@ -35,11 +35,8 @@ in rec {
   programs.bash = {
     enable = true;
 
-    initExtra = ''
-      export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
-    '';
-
     profileExtra = ''
+      export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
       source ~/.nix-profile/etc/profile.d/nix.sh
     '';
   };
