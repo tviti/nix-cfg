@@ -4,24 +4,24 @@ let home_directory = builtins.getEnv "HOME";
     next = pkgs.callPackage ./mypkgs/next { };
 in rec {
   home = {
-    packages = [
-      pkgs.git
+    packages = with pkgs; [
+      git
 
-      pkgs.aspell
-      pkgs.aspellDicts.en
-      pkgs.aspellDicts.en-computers
-      pkgs.aspellDicts.en-science
+      aspell
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
 
-      pkgs.pass
-      pkgs.curl
+      pass
+      curl
       
-      pkgs.pandoc
-      pkgs.haskellPackages.pandoc-citeproc
+      pandoc
+      haskellPackages.pandoc-citeproc
 
-      # pkgs.dbus
-      # pkgs.dbus_daemon
-      # pkgs.dbus_libs
-      pkgs.qt5.qtbase
+      # dbus
+      # dbus_daemon
+      # dbus_libs
+      qt5.qtbase
       next
     ];
 
