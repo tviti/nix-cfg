@@ -12,15 +12,9 @@ in rec {
       aspellDicts.en-computers
       aspellDicts.en-science
 
-      pass
-      curl
-      
       pandoc
       haskellPackages.pandoc-citeproc
 
-      # dbus
-      # dbus_daemon
-      # dbus_libs
       qt5.qtbase
       next
     ];
