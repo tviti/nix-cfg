@@ -1,11 +1,19 @@
 { config, pkgs, ... }:
 
-{
+let
+  mydbus = pkgs.callPackage ../mypkgs/dbus { };
+in {
   imports = [ <home-manager/nix-darwin> ];
 
   fonts = {
     enableFontDir = true;
-    fonts = with pkgs; [ dejavu_fonts fira-code hack-font ];
+    fonts = with pkgs; [
+      dejavu_fonts
+      fira-code
+      hack-font
+      inconsolata
+      source-code-pro
+    ];
   };
 
   # List packages installed in system profile. To search by name, run:
