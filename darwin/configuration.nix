@@ -43,4 +43,12 @@ in {
   # $ sysctl -n hw.ncpu
   nix.maxJobs = 1;
   nix.buildCores = 1;
+
+  system.defaults = {
+    NSGlobalDomain = {
+      # Enable subpixel font rendering on non-Apple LCDs
+      # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
+      AppleFontSmoothing = 1;
+    };
+  };
 }
