@@ -1,9 +1,17 @@
 { config, pkgs, ... }:
 
-let
-  mydbus = pkgs.callPackage ../mypkgs/dbus { };
-in {
+{
   imports = [ <home-manager/nix-darwin> ];
+
+  nixpkgs = {
+    # Taken from John Wiegley's nix-config repo
+    overlays =
+      let path = ../overlays; in with builtins;
+      map (n: import (path + ("/" + n)))
+          (filter (n: match ".*\\.nix" n != null ||
+                      pathExists (path + ("/" + n + "/default.nix")))
+                  (attrNames (readDir path)));
+  };
 
   fonts = {
     enableFontDir = true;
@@ -22,9 +30,10 @@ in {
     vim
     curl
     pass
-    # mydbus
+    skhd
   ];
 
+  services.skhd.enable = true;
   
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
