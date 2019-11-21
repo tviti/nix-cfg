@@ -59,6 +59,8 @@ in rec {
       extra-dicts en_US-science.rws
       add-extra-dicts en-computers.rws
     '';
+
+    configFile."skhd/skhdrc".source = ./config/skhdrc;
   };
   
   # Let Home Manager install and manage itself.
