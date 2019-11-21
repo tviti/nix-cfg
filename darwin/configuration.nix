@@ -1,7 +1,15 @@
 { config, pkgs, ... }:
 
-{
-  imports = [ <home-manager/nix-darwin> ];
+
+let
+  yabai = pkgs.callPackage ../pkgs/yabai {
+    inherit (pkgs.darwin.apple_sdk.frameworks) Carbon Cocoa ScriptingBridge;
+  };
+in {
+  imports = [
+    <home-manager/nix-darwin>
+    ../services/yabai.nix
+  ];
 
   nixpkgs = {
     # Taken from John Wiegley's nix-config repo
@@ -31,9 +39,12 @@
     curl
     pass
     skhd
+    yabai
   ];
 
+  services.yabai.package = yabai;
   services.skhd.enable = true;
+  services.yabai.enable = true;
   
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
