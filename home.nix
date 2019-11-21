@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let home_directory = builtins.getEnv "HOME";
-    next = pkgs.callPackage ./mypkgs/next { };
+    next = pkgs.callPackage ./pkgs/next { };
 in rec {
   home = {
     packages = with pkgs; [
@@ -50,6 +50,8 @@ in rec {
 
     configHome = "${home_directory}/.config";
 
+    configFile."skhd/skhdrc".source = ./config/skhdrc;
+    configFile."yabai/yabairc".source = ./config/yabairc;
     configFile."aspell/config".text = ''
       dict-dir ${home_directory}/.nix-profile/lib/aspell
       home-dir ${home_directory}/Sync
@@ -59,8 +61,6 @@ in rec {
       extra-dicts en_US-science.rws
       add-extra-dicts en-computers.rws
     '';
-
-    configFile."skhd/skhdrc".source = ./config/skhdrc;
   };
   
   # Let Home Manager install and manage itself.
