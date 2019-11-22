@@ -62,6 +62,8 @@ in rec {
       add-extra-dicts en-computers.rws
     '';
   };
+
+  home.file.".chktexrc".source = ./config/chktexrc;
   
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
