@@ -48,6 +48,32 @@ in rec {
     enable = true;
   };
 
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacsMacport;
+    extraPackages = (epkgs: with epkgs; [
+      auctex
+      counsel
+      ess
+      evil evil-collection evil-magit evil-org
+      elfeed
+      elpy
+      eyebrowse
+      flycheck
+      highlight-numbers
+      nix-mode
+      magit magit-annex
+      matlab-mode
+      org org-bullets
+      pdf-tools
+      polymode poly-markdown poly-R
+      rainbow-delimiters
+      slime
+      spacemacs-theme spaceline
+      which-key
+    ]);
+  };
+  
   xdg = {
     enable = true;
 
