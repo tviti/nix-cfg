@@ -41,19 +41,19 @@ yabai -m config right_padding                20
 yabai -m config window_gap                   10
 
 # Trendy space settings
+yabai -m config --space 2 layout 	     bsp
+yabai -m config --space 2 top_padding 	     100
+yabai -m config --space 2 bottom_padding     100
+yabai -m config --space 2 left_padding       100
+yabai -m config --space 2 right_padding      100
+yabai -m config --space 2 window_gap 	     50
+
 yabai -m config --space 4 layout 	     bsp
 yabai -m config --space 4 top_padding 	     100
-yabai -m config --space 4 bottom_padding     100
-yabai -m config --space 4 left_padding       100
-yabai -m config --space 4 right_padding      100
+yabai -m config --space 4 bottom_padding    100
+yabai -m config --space 4 left_padding      100
+yabai -m config --space 4 right_padding     100
 yabai -m config --space 4 window_gap 	     50
-
-yabai -m config --space 10 layout 	     bsp
-yabai -m config --space 10 top_padding 	     100
-yabai -m config --space 10 bottom_padding    100
-yabai -m config --space 10 left_padding      100
-yabai -m config --space 10 right_padding     100
-yabai -m config --space 10 window_gap 	     50
 
 # Fix for getting Emacs to play nicely w/ Yabai, per
 # https://github.com/koekeishiya/yabai/issues/86
