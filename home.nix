@@ -9,6 +9,7 @@ in rec {
       aspellDicts.en
       aspellDicts.en-computers
       aspellDicts.en-science
+      bibutils
       git
       vim
       pass
@@ -20,6 +21,7 @@ in rec {
       # dbus_libs
       qt5.qtbase
       next
+      wget
     ];
 
     sessionVariables = {
