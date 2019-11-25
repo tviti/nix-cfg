@@ -5,21 +5,15 @@ let home_directory = builtins.getEnv "HOME";
 in rec {
   home = {
     packages = with pkgs; [
-      aspell
-      aspellDicts.en
-      aspellDicts.en-computers
-      aspellDicts.en-science
+      aspell aspellDicts.en aspellDicts.en-computers aspellDicts.en-science
       bibutils
       git
       vim
       pass
       curl
-      pandoc
-      haskellPackages.pandoc-citeproc
-      # dbus
-      # dbus_daemon
-      # dbus_libs
+      pandoc haskellPackages.pandoc-citeproc
       qt5.qtbase
+      R-with-my-packages
       next
       wget
     ];
