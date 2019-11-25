@@ -1,3 +1,16 @@
+/*
+
+An overlay for building bibutils on Darwin systems. Note that nixpkgs.bibutils is
+listed as linux ONLY, so here we override both the version (nixpkgs is also
+behind), the allowed platforms, and the disable tests (for some reason, build
+goes OK, but tests fail, usually for intlib.c).
+
+Although their are failed tests, my experience using ris2xml | xml2bib to
+convert .ris formatted citations seem to suggest everything is reasonably well
+behaved (fingers crossed).
+
+*/
+
 self: super:
 {
   bibutils = super.bibutils.overrideAttrs(oldAttrs: {
