@@ -2,12 +2,16 @@
 
 let home_directory = builtins.getEnv "HOME";
     next = pkgs.callPackage ./pkgs/next { };
+    gmt = pkgs.callPackage ./pkgs/gmt {
+      inherit (pkgs.darwin.apple_sdk.frameworks) Accelerate CoreGraphics CoreVideo;
+    };
 in rec {
   home = {
     packages = with pkgs; [
       aspell aspellDicts.en aspellDicts.en-computers aspellDicts.en-science
       bibutils
       git
+      ghostscript
       vim
       pass
       curl
@@ -16,6 +20,7 @@ in rec {
       R-with-my-packages
       next
       wget
+      gmt
     ];
 
     sessionVariables = {
