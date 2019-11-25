@@ -1,3 +1,11 @@
+/*
+
+An overlay for building skhd on Darwin systems. As of this writing, this will
+source a newer version than nixpkgs.skhd (that one still won't search
+$XDG_CONFIG_HOME for skhdrc).
+
+*/
+
 self: super:
 {
 
