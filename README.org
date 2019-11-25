@@ -1,0 +1,21 @@
+#+title: Declarative system configuration via Nix
+
+* Abstract
+  The files contained in this folder define a system configuration using the
+  =nix= language, that can be implemented using a combination of [[https://nixos.org/nix/][nix]] (the package
+  manager), [[https://github.com/rycee/home-manager][home_manager]], and [[https://github.com/LnL7/nix-darwin][nix-darwin]].
+
+* How
+  I try to implement as many things as possible using =home_manager= (as opposed
+  to =nix-darwin=), so as to make this environment as operating system agnostic
+  as possible. Because =nix-darwin= is a =nixos= emulation layer for =macOS=,
+  things defined implemented using =nix-darwin= are at best portable to =nixOS=
+  systems.
+
+* Folders
+  - config: Misc. dotfiles that should be symlinked by =home_manager=. Also an
+    appropriate place to place =.nix= files that manage user level configs.
+  - darwin: System level packages and configuration options (used by =nix-darwin=).
+  - overlays: Nix overlays (primarily used to override default package attrs).
+  - pkgs: Custom package definitions.
+  - services: System level service definitions (used by =nix-darwin=).
