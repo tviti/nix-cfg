@@ -8,7 +8,7 @@ stdenv.mkDerivation {
   propagatedBuildInputs = [ pkgs.python3Packages.virtualenvwrapper ];
 
   phases = [ "installPhase" ];
-  
+
   installPhase = ''
     virtualenv $out
     source $out/bin/activate
@@ -16,5 +16,9 @@ stdenv.mkDerivation {
   '';
 
   pathsToLink = [ ];
+
+  meta = with stdenv; {
+    platforms = [ "x86_64-linux" "x86_64-darwin" ];
+  };
 }
-    
+
