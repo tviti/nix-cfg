@@ -13,10 +13,9 @@ in rec {
       git
       ghostscript
       vim
-      pass
       curl
       pandoc haskellPackages.pandoc-citeproc
-      qt5.qtbase
+      pass
       R-with-my-packages
       next
       wget
