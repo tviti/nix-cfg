@@ -26,19 +26,29 @@ in stdenv.mkDerivation rec {
         --replace "#!/usr/bin/env python3" "#!${next-pyqt.out}/bin/python"
   '';
   
-  buildPhase = ''
-    export HOME=$TMP
-    make app-bundle
-  '';
+  buildPhase =
+    if stdenv.isDarwin then ''
+       export HOME=$TMP
+       make app-bundle
+    '' else ''
+       make next
+    '';
 
-  installPhase = ''
-    mkdir -p $out/Applications
-    mv ./Next.app $out/Applications/Next.app
-  '';
+  installPhase =
+    if stdenv.isDarwin then ''
+       mkdir -p $out/Applications
+       mv ./Next.app $out/Applications/Next.app
+    '' else ''
+       install -D -m0755 next $out/bin/next
+    '';
   
-  meta = {
-    platforms = stdenv.lib.platforms.darwin;
+  meta = with stdenv; {
+    platforms = ["x86_64-linux" "x86_64-darwin" ];
   };
 
-  pathsToLink = [ "/Applications" ];
+  pathsToLink =
+    if stdenv.isDarwin then
+      [ "/Applications" "/bin" ]
+    else
+      [ "/bin" ];
 }
