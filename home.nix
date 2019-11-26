@@ -10,16 +10,18 @@ in rec {
     packages = with pkgs; [
       aspell aspellDicts.en aspellDicts.en-computers aspellDicts.en-science
       bibutils
+      curl
       git
       ghostscript
-      vim
-      curl
+      gmt
+      my-emacs
+      next
+      nixfmt # for emacs nix-mode
       pandoc haskellPackages.pandoc-citeproc
       pass
       R-with-my-packages
-      next
       wget
-      gmt
+      vim
     ];
 
     sessionVariables = {
@@ -48,32 +50,6 @@ in rec {
     enable = true;
   };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacsMacport;
-    extraPackages = (epkgs: with epkgs; [
-      auctex
-      counsel
-      ess
-      evil evil-collection evil-magit evil-org
-      elfeed
-      elpy
-      eyebrowse
-      flycheck
-      highlight-numbers
-      nix-mode
-      magit magit-annex
-      matlab-mode
-      org org-bullets
-      pdf-tools
-      polymode poly-markdown poly-R
-      rainbow-delimiters
-      slime
-      spacemacs-theme spaceline
-      which-key
-    ]);
-  };
-  
   xdg = {
     enable = true;
 
