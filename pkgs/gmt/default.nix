@@ -10,13 +10,14 @@ in stdenv.mkDerivation rec {
     sha256 = "8b91af18775a90968cdf369b659c289ded5b6cb2719c8c58294499ba2799b650";
   };
 
-  nativeBuildInputs = [
-    cmake
-    # NOTE: These are specific to darwin
-    Accelerate
-    CoreGraphics
-    CoreVideo
-  ];
+  nativeBuildInputs =
+    if stdenv.isDarwin then [
+      cmake
+      # NOTE: These are specific to darwin
+      Accelerate
+      CoreGraphics
+      CoreVideo
+    ] else [ cmake ];
 
   buildInputs = with pkgs; [
     curl
@@ -51,6 +52,6 @@ in stdenv.mkDerivation rec {
       The Generic Mapping Toolbox: Tools for manipulating and plotting
       geographic and Cartesian data.
     '';
-    platforms = platforms.darwin;
+    platforms = [ "x86_64-linux" "x86_64-darwin" ];
   };
 }
