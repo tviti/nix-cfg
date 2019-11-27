@@ -21,13 +21,13 @@ self: super:
     };
 
     # TODO: Tests don't pass on Darwin for some reason.
-    doCheck = false;
+    doCheck = if super.stdenv.isDarwin then false else true;
 
     configureFlags = [
       "--install-dir" "$out/bin"
       "--install-lib" "$out/lib"
     ];
 
-    meta.platforms = super.stdenv.lib.platforms.darwin;
+    meta.platforms = [ "x86_64-linux" "x86_64-darwin" ];
   });
 }
