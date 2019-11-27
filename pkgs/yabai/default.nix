@@ -1,12 +1,9 @@
-/*
+/* A derivation that installs the yabai window manager. See also services/yabai.nix
+   for the definition of the associated system service.
 
-A derivation that installs the yabai window manager. See also services/yabai.nix
-for the definition of the associated system service.
-
-TODO: At the moment, this will copy ./org.nixos.yabai.plist into the build
-output dir, but afaict this doesn't ever get symlinked anywhere (yet yabai still
-works), so the copy step is probably unnecessary.
-
+   TODO: At the moment, this will copy ./org.nixos.yabai.plist into the build
+   output dir, but afaict this doesn't ever get symlinked anywhere (yet yabai still
+   works), so the copy step is probably unnecessary.
 */
 
 { pkgs, stdenv, fetchFromGitHub, Carbon, Cocoa, ScriptingBridge }:
@@ -36,10 +33,11 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with stdenv.lib; {
-    homepage = https://github.com/koekeishiya/yabai;
+    homepage = "https://github.com/koekeishiya/yabai";
     description = ''
       A tiling window manager for macOS based on binary space partitioning.
     '';
     platforms = platforms.darwin;
+    license = "MIT";
   };
-} 
+}

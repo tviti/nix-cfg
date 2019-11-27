@@ -1,7 +1,8 @@
 { pkgs, stdenv, fetchurl, cmake, Accelerate, CoreGraphics, CoreVideo, ... }:
 
-let dcw = pkgs.callPackage ./dcw.nix { };
-    gshhg = pkgs.callPackage ./gshhg.nix { };
+let
+  dcw = pkgs.callPackage ./dcw.nix { };
+  gshhg = pkgs.callPackage ./gshhg.nix { };
 in stdenv.mkDerivation rec {
   pname = "gmt";
   version = "6.0.0";
@@ -10,24 +11,16 @@ in stdenv.mkDerivation rec {
     sha256 = "8b91af18775a90968cdf369b659c289ded5b6cb2719c8c58294499ba2799b650";
   };
 
-  nativeBuildInputs =
-    if stdenv.isDarwin then [
-      cmake
-      # NOTE: These are specific to darwin
-      Accelerate
-      CoreGraphics
-      CoreVideo
-    ] else [ cmake ];
+  nativeBuildInputs = if stdenv.isDarwin then [
+    cmake
+    # NOTE: These are specific to darwin
+    Accelerate
+    CoreGraphics
+    CoreVideo
+  ] else
+    [ cmake ];
 
-  buildInputs = with pkgs; [
-    curl
-    fftw
-    gdal
-    netcdf
-    pcre
-    dcw
-    gshhg
-  ];
+  buildInputs = with pkgs; [ curl fftw gdal netcdf pcre dcw gshhg ];
 
   configurePhase = ''
     mkdir build ; cd build

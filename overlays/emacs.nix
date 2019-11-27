@@ -1,14 +1,11 @@
+# Emacs w/ melpa/elpa packages
+
 self: super:
 let
-  # customEmacsPackages = super.emacsPackagesNgGen
-  #   (if super.hostPlatform.isDarwin then super.emacsMacport else super.emacs);
   package = if super.stdenv.isDarwin then super.emacsMacport else super.emacs;
   customEmacsPackages = super.emacsPackages.overrideScope' (self: super: {
     # use a custom version of emacs
     emacs = package;
-    # use the unstable MELPA version of magit
-    slime = self.melpaPackages.slime;
-    nix-mode = self.melpaPackages.nix-mode;
   });
 in {
   my-emacs = customEmacsPackages.emacsWithPackages (epkgs:

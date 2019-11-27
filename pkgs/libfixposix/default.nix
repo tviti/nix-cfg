@@ -1,3 +1,8 @@
+/* A derivation for building libfixposix on Darwin systems (for some reason, the
+   nixpkgs derivation is linux only). This probably doesn't have to be an entire
+   derivation (an overlay that overrides meta.platforms might be sufficient).
+*/
+
 { pkgs, stdenv, fetchFromGitHub, autoreconfHook, pkgconfig }:
 
 stdenv.mkDerivation rec {
@@ -22,10 +27,10 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ autoreconfHook pkgconfig ];
   buildInputs = with pkgs; [ git getconf ];
 
-
   meta = with stdenv.lib; {
-    homepage = https://github.com/sionescu/libfixposix;
-    description = "Thin wrapper over POSIX syscalls and some replacement functionality";
+    homepage = "https://github.com/sionescu/libfixposix";
+    description =
+      "Thin wrapper over POSIX syscalls and some replacement functionality";
     license = licenses.boost;
     platforms = platforms.darwin;
   };

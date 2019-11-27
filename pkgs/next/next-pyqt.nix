@@ -12,13 +12,11 @@ stdenv.mkDerivation {
   installPhase = ''
     virtualenv $out
     source $out/bin/activate
-    pip install pyqt5 PyQtWebEngine
+    pip install pyqt5 PyQtWebEngine # This fails on CentOS for some reason
   '';
 
   pathsToLink = [ ];
 
-  meta = with stdenv; {
-    platforms = [ "x86_64-linux" "x86_64-darwin" ];
-  };
+  meta = with stdenv; { platforms = [ "x86_64-linux" "x86_64-darwin" ]; };
 }
 
