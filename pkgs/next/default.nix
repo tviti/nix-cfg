@@ -2,10 +2,10 @@
 
 with pkgs;
 let
-  libfixposix = pkgs.callPackage ../libfixposix { };
+  libfixposix = if stdenv.isDarwin then pkgs.callPackage ../libfixposix { } else pkgs.libfixposix;
   next-pyqt = pkgs.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
-  name = "next-pyqt";
+  name = "next";
   version = "9d65598a0911a09e3befcad65444763a51527913";
 
   src = fetchurl {
