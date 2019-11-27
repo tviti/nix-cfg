@@ -14,12 +14,12 @@ in rec {
       git
       ghostscript
       gmt
-      my-emacs
+      myEmacs
+      myR
       next
       nixfmt # for emacs nix-mode
       pandoc haskellPackages.pandoc-citeproc
       pass
-      R-with-my-packages
       wget
       vim
     ];

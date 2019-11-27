@@ -2,15 +2,16 @@
 
 self: super:
 let
+  # Use emacs-macport on Darwin systems
   package = if super.stdenv.isDarwin then super.emacsMacport else super.emacs;
   customEmacsPackages = super.emacsPackages.overrideScope' (self: super: {
-    # use a custom version of emacs
     emacs = package;
   });
 in {
-  my-emacs = customEmacsPackages.emacsWithPackages (epkgs:
+  myEmacs = customEmacsPackages.emacsWithPackages (epkgs:
     with epkgs; [
       auctex
+      company
       counsel
       ess
       evil
