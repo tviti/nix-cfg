@@ -37,13 +37,13 @@ in stdenv.mkDerivation rec {
 
   installPhase = if stdenv.isDarwin then ''
     mkdir -p $out/Applications
+    mkdir -p $out/bin
     mv ./Next.app $out/Applications/Next.app
+    ln -s $out/Applications/Next.app/Contents/MacOS/next $out/bin/next
   '' else ''
     install -D -m0755 next $out/bin/next
   '';
 
   meta = with stdenv; { platforms = [ "x86_64-linux" "x86_64-darwin" ]; };
 
-  pathsToLink =
-    if stdenv.isDarwin then [ "/Applications" "/bin" ] else [ "/bin" ];
 }
