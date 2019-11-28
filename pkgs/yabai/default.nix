@@ -1,9 +1,5 @@
 /* A derivation that installs the yabai window manager. See also services/yabai.nix
    for the definition of the associated system service.
-
-   TODO: At the moment, this will copy ./org.nixos.yabai.plist into the build
-   output dir, but afaict this doesn't ever get symlinked anywhere (yet yabai still
-   works), so the copy step is probably unnecessary.
 */
 
 { pkgs, stdenv, fetchFromGitHub, Carbon, Cocoa, ScriptingBridge }:
@@ -26,12 +22,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out/share/man/man1/
     cp ./bin/yabai $out/bin/yabai
     cp ./doc/yabai.1 $out/share/man/man1/yabai.1
-  '';
-
-  postInstall = ''
-    mkdir -p $out/Library/LaunchDaemons
-    cp ${./org.nixos.yabai.plist} $out/Library/LaunchDaemons/org.nixos.yabai.plist
-    substituteInPlace $out/Library/LaunchDaemons/org.nixos.yabai.plist --subst-var out
   '';
 
   meta = with stdenv.lib; {
