@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, stdenv, fetchurl, sbcl, ... }:
 
 with pkgs;
 let
@@ -19,26 +19,29 @@ in stdenv.mkDerivation rec {
   # Stripping destroys the generated SBCL image
   dontStrip = true;
 
-  nativeBuildInputs = [ sbcl makeWrapper libfixposix ];
+  nativeBuildInputs = [ sbcl libfixposix ];
   buildInputs = [ next-pyqt curl cacert dbus pass ];
 
-  # Make sure this runs the correct python env
+  # Set the port to use the next-pyqt python env
   configurePhase = ''
     substituteInPlace ./ports/pyqt-webengine/next-pyqt-webengine.py \
         --replace "#!/usr/bin/env python3" "#!${next-pyqt.out}/bin/python"
   '';
 
+  # Quicklisp will want to create a few hidden/dot-dirs in $HOME (which will
+  # due to nix' homeless-shelter), so we instead point it to $out
   buildPhase = if stdenv.isDarwin then ''
-    export HOME=$TMP
+    export HOME=$out/Applications/Next.app/Contents/MacOS/
+    mkdir -p $out/Applications/Next.app/Contents/MacOS/
     make app-bundle
   '' else ''
     make next
   '';
 
   installPhase = if stdenv.isDarwin then ''
-    mkdir -p $out/Applications
     mkdir -p $out/bin
-    mv ./Next.app $out/Applications/Next.app
+    cp -rv ./Next.app $out/Applications/
+    rm -rf ./Next.app
     ln -s $out/Applications/Next.app/Contents/MacOS/next $out/bin/next
   '' else ''
     install -D -m0755 next $out/bin/next
