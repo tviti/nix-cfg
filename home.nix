@@ -26,6 +26,8 @@ in rec {
 
     sessionVariables = {
       ASPELL_CONF = "conf ${xdg.configHome}/aspell/config;";
+      ALTERNATE_EDITOR = "${pkgs.vim}/bin/vi";
+      EDITOR = "${pkgs.myEmacs}/bin/emacsclient";
     };
   };
 
