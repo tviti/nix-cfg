@@ -2,7 +2,7 @@
    for the definition of the associated system service.
 */
 
-{ pkgs, stdenv, fetchFromGitHub, Carbon, Cocoa, ScriptingBridge }:
+{ pkgs, stdenv, fetchFromGitHub, Carbon, Cocoa, ScriptingBridge, ... }:
 
 stdenv.mkDerivation rec {
   pname = "yabai";
@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
     owner = "koekeishiya";
     repo = "yabai";
     rev = "${version}";
-    sha256 = "0bfag249kk5k25imwxassz0wp6682gjzkhr38dibbrrqvdwig3pg";
+    sha256 = "1hmkcp0wxfamjqkp6xhrvm86rsh7q664sl0gd1ikz09jf4ywp897";
   };
 
   buildInputs = [ Carbon Cocoa ScriptingBridge ];
