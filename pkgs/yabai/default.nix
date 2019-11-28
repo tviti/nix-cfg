@@ -22,8 +22,10 @@ stdenv.mkDerivation rec {
   buildInputs = [ Carbon Cocoa ScriptingBridge ];
 
   installPhase = ''
-    mkdir -p $bin/bin $out/bin
+    mkdir -p $out/bin
+    mkdir -p $out/share/man/man1/
     cp ./bin/yabai $out/bin/yabai
+    cp ./doc/yabai.1 $out/share/man/man1/yabai.1
   '';
 
   postInstall = ''
