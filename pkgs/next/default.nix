@@ -1,6 +1,5 @@
 { pkgs, stdenv, fetchurl, sbcl, ... }:
 
-with pkgs;
 let
   libfixposix = if stdenv.isDarwin then
     pkgs.callPackage ../libfixposix { }
@@ -19,8 +18,8 @@ in stdenv.mkDerivation rec {
   # Stripping destroys the generated SBCL image
   dontStrip = true;
 
-  nativeBuildInputs = [ sbcl libfixposix ];
-  buildInputs = [ next-pyqt curl cacert dbus pass ];
+  nativeBuildInputs = [ pkgs.sbcl libfixposix ];
+  buildInputs = with pkgs; [ next-pyqt curl cacert dbus pass ];
 
   # Set the port to use the next-pyqt python env
   configurePhase = ''
