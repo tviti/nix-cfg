@@ -1,3 +1,16 @@
+/* A derivation for building Next browser with the PyQtWebEngine frontend. This was
+   originally written to install on a Darwin system, and I have had problems with
+   getting it working on a CentOS 7 machine (the next-pyqt derivation fails to
+   install PyQt5 and PyQtWebEngine).
+
+   Since the nixpkgs libfixposix derivation does not support Darwin, I have
+   packaged it myself (with the .nix file based on the brew recipe). It would
+   probably be better to actually pass this dependency as an argument, but since
+   we rely on this specific derivation, I just call it directly from
+   here. Ideally, we would also let nix handle the quicklisp dependencies, but
+   those nixpkgs also don't support Darwin (ASDF is the first to throw an
+   error), hence this package uses quicklisp directly.  */
+
 { pkgs, stdenv, fetchurl, sbcl, ... }:
 
 let
@@ -27,8 +40,8 @@ in stdenv.mkDerivation rec {
         --replace "#!/usr/bin/env python3" "#!${next-pyqt.out}/bin/python"
   '';
 
-  # Quicklisp will want to create a few hidden/dot-dirs in $HOME (which will
-  # due to nix' homeless-shelter), so we instead point it to $out
+  # Quicklisp will want to create a few hidden-/dot-dirs in $HOME (which will
+  # fail due to nix' use of homeless-shelter), so we instead point it to $out
   buildPhase = if stdenv.isDarwin then ''
     export HOME=$out/Applications/Next.app/Contents/MacOS/
     mkdir -p $out/Applications/Next.app/Contents/MacOS/
