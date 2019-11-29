@@ -14,13 +14,14 @@ self: super: {
     src = super.fetchurl {
       url =
         "https://downloads.sourceforge.net/project/bibutils/bibutils_6.8_src.tgz";
-      sha256 = "072cmhv692nk1lfcwmaqid5gpg8q4jc4vai5ss8lj72zms32p882";
+      sha256 = "1n28fjrl7zxjxvcqzmrc9xj8ly6nkxviimxbzamj8dslnkzpzqw1";
     };
 
     # TODO: Tests don't pass on Darwin for some reason.
     doCheck = if super.stdenv.isDarwin then false else true;
 
-    configureFlags = [ "--install-dir" "$out/bin" "--install-lib" "$out/lib" ];
+    configureFlags =
+      [ "--install-dir" "$(out)/bin" "--install-lib" "$(out)/lib" ];
 
     meta.platforms = [ "x86_64-linux" "x86_64-darwin" ];
   });
