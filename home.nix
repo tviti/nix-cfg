@@ -1,14 +1,19 @@
 { config, pkgs, ... }:
 
-let home_directory = builtins.getEnv "HOME";
-    next = pkgs.callPackage ./pkgs/next { };
-    gmt = pkgs.callPackage ./pkgs/gmt {
-      inherit (pkgs.darwin.apple_sdk.frameworks) Accelerate CoreGraphics CoreVideo;
-    };
+let
+  home_directory = builtins.getEnv "HOME";
+  next = pkgs.callPackage ./pkgs/next { };
+  gmt = pkgs.callPackage ./pkgs/gmt {
+    inherit (pkgs.darwin.apple_sdk.frameworks)
+      Accelerate CoreGraphics CoreVideo;
+  };
 in rec {
   home = {
     packages = with pkgs; [
-      aspell aspellDicts.en aspellDicts.en-computers aspellDicts.en-science
+      aspell
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
       bibutils
       curl
       git
@@ -18,7 +23,8 @@ in rec {
       myR
       next
       nixfmt # for emacs nix-mode
-      pandoc haskellPackages.pandoc-citeproc
+      pandoc
+      haskellPackages.pandoc-citeproc
       pass
       wget
       vim
@@ -31,30 +37,26 @@ in rec {
     };
   };
 
-  # home.file.".bash_profile".source = ./.bash_profile;
+  programs = {
+    bash = {
+      enable = true;
+      profileExtra = ''
+        export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
+        source ~/.nix-profile/etc/profile.d/nix.sh
+      '';
+    };
 
-  programs.bash = {
-    enable = true;
+    git = {
+      enable = true;
+      userName = "Taylor Viti";
+      userEmail = "tviti@hawaii.edu";
+    };
 
-    profileExtra = ''
-      export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
-      source ~/.nix-profile/etc/profile.d/nix.sh
-    '';
+    gpg.enable = true;
   };
   
-  programs.git = {
-    enable = true;
-	  userName = "Taylor Viti";
-	  userEmail = "tviti@hawaii.edu";
-  };
-
-  programs.gpg = {
-    enable = true;
-  };
-
   xdg = {
     enable = true;
-
     configHome = "${home_directory}/.config";
 
     configFile."skhd/skhdrc".source = ./config/skhdrc;
@@ -71,7 +73,7 @@ in rec {
   };
 
   home.file.".chktexrc".source = ./config/chktexrc;
-  
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
