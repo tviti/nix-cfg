@@ -1,3 +1,5 @@
+# NOTE: This is based on the chunkwm service def in nix-darwin
+
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -9,7 +11,7 @@ in {
     services.yabai.enable = mkOption {
       type = types.bool;
       default = false;
-      description = "Whether to enable the chunkwm window manager.";
+      description = "Whether to enable the yabai window manager.";
     };
 
     services.yabai.package = mkOption {
