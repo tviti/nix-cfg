@@ -1,0 +1,3 @@
+[submodule "config/next-cfg"]
+	path = config/next-cfg
+	url = git@github.com:tviti/next-cfg.git

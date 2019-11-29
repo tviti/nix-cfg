@@ -59,6 +59,7 @@ in rec {
     enable = true;
     configHome = "${home_directory}/.config";
 
+    configFile."next".source = ./config/next-cfg;
     configFile."skhd/skhdrc".source = ./config/skhdrc;
     configFile."yabai/yabairc".source = ./config/yabairc;
     configFile."aspell/config".text = ''
