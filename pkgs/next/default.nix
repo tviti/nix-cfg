@@ -21,11 +21,11 @@ let
   next-pyqt = pkgs.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
   name = "next";
-  version = "9d65598a0911a09e3befcad65444763a51527913";
+  version = "1899e526b32ac766b6242e5ed6358ec36df66f5b";
 
   src = fetchurl {
     url = "https://github.com/tviti/next/archive/${version}.tar.gz";
-    sha256 = "0ba7i7yn6ya7qdc768z4z23x2zyq78w67pgs6abav2jyxp83qy2n";
+    sha256 = "0dwbn61jnjw8im44w037j6kclh5xkk9xh9b0s6sf53a5p3a07ixw";
   };
 
   # Stripping destroys the generated SBCL image
