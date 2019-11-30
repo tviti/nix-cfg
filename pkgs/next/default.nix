@@ -28,6 +28,8 @@ in stdenv.mkDerivation rec {
     sha256 = "0dwbn61jnjw8im44w037j6kclh5xkk9xh9b0s6sf53a5p3a07ixw";
   };
 
+  patches = [ ./Makefile-fixtypo.patch ];
+
   # Stripping destroys the generated SBCL image
   dontStrip = true;
 
