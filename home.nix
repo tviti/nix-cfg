@@ -42,7 +42,7 @@ in rec {
       enable = true;
       profileExtra = ''
         export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
-        source ~/.nix-profile/etc/profile.d/nix.sh
+        source ${home_directory}/.nix-profile/etc/profile.d/nix.sh
       '';
     };
 
@@ -65,7 +65,7 @@ in rec {
     configFile."aspell/config".text = ''
       dict-dir ${home_directory}/.nix-profile/lib/aspell
       home-dir ${home_directory}/Sync
-      personal /Users/taylor/Sync/.aspell.en.pws
+      personal ${home_directory}/Sync/.aspell.en.pws
 
       master en_US
       extra-dicts en_US-science.rws
