@@ -3,6 +3,9 @@
    getting it working on a CentOS 7 machine (the next-pyqt derivation fails to
    install PyQt5 and PyQtWebEngine).
 
+   Note that this derivation clones from my own fork of the next repo (i.e. this
+   is not using the official next source).
+
    Since the nixpkgs libfixposix derivation does not support Darwin, I have
    packaged it myself (with the .nix file based on the brew recipe). It would
    probably be better to actually pass this dependency as an argument, but since
@@ -11,7 +14,7 @@
    those nixpkgs also don't support Darwin (ASDF is the first to throw an
    error), hence this package uses quicklisp directly.  */
 
-{ pkgs, stdenv, fetchurl, sbcl, ... }:
+{ pkgs, stdenv, fetchFromGitHub, sbcl, ... }:
 
 let
   libfixposix = if stdenv.isDarwin then
@@ -21,14 +24,14 @@ let
   next-pyqt = pkgs.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
   name = "next";
-  version = "1899e526b32ac766b6242e5ed6358ec36df66f5b";
+  version = "v1.3.4";
 
-  src = fetchurl {
-    url = "https://github.com/tviti/next/archive/${version}.tar.gz";
-    sha256 = "0dwbn61jnjw8im44w037j6kclh5xkk9xh9b0s6sf53a5p3a07ixw";
+  src = fetchFromGitHub {
+    owner = "tviti";
+    repo = "next";
+    rev = "ba0f1fc1cfa09fee544d61cf6e3848e1e0b7aa57";
+    sha256 = "0c6xdnbpyydwhg5pdp1498wmmgg0bd1drypyl2rxpagibbmsx9kd";
   };
-
-  patches = [ ./Makefile-fixtypo.patch ];
 
   # Stripping destroys the generated SBCL image
   dontStrip = true;
