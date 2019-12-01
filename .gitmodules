@@ -1,3 +1,12 @@
 [submodule "config/next-cfg"]
 	path = config/next-cfg
 	url = git@github.com:tviti/next-cfg.git
+[submodule "nix-src/nix-darwin"]
+	path = nix-src/nix-darwin
+	url = git@github.com:tviti/nix-darwin.git
+[submodule "nix-src/home-manager"]
+	path = nix-src/home-manager
+	url = git@github.com:tviti/home-manager.git
+[submodule "nix-src/nixpkgs"]
+	path = nix-src/nixpkgs
+	url = git@github.com:tviti/nixpkgs.git

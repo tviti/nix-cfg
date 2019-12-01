@@ -6,10 +6,16 @@ let
     inherit (pkgs.darwin.apple_sdk.frameworks) Carbon Cocoa ScriptingBridge;
   };
 in {
-  imports = [
-    <home-manager/nix-darwin>
-    ../services/yabai.nix
-  ];
+  imports = [ ../services/yabai.nix ];
+
+  nix = {
+    nixPath = [
+      # If you move the repo, make sure to change these as well!
+      "nixpkgs=$HOME/.config/nixpkgs/nix-src/nixpkgs"
+      "home-manager=$HOME/.config/nixpkgs/nix-src/home-manager"
+      "darwin=$HOME/.config/nixpkgs/nix-src/nix-darwin"
+    ];
+  };
 
   nixpkgs = {
     # Taken from John Wiegley's nix-config repo

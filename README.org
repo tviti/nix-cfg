@@ -19,3 +19,30 @@
   - overlays: Nix overlays (primarily used to override default package attrs).
   - pkgs: Custom package definitions.
   - services: System level service definitions (used by nix-darwin).
+* $NIX_PATH
+  I am currently experimenting with keeping local copies of the nixpkgs,
+  home_manager, and nix-darwin repos (located in =./nix-src=), with all
+  nix-channels removed. I haven't tried to boostrap this config on a system that
+  didn't already have nix and home_manager installed (/yet/), but keep in mind
+  that on the first invocation of =darwin-rebuild switch= or =home-manager
+  switch=, nix will have no idea where to locate these things. The simplest way
+  to deal with this (assuming the tools are already installed) seems to be
+  passing them explicitly:
+
+  #+begin_src bash
+    darwin-rebuild switch -I darwin=<path/to/nix-darwin> -I home-manager=<path/to/home-manager> -I nixpkgs=<path/to/nixpkgs>
+  #+end_src
+  
+  after which =$NIX_PATH= should have been properly set for all future
+  invocations of =darwin-rebuild= and =home-manager=. On a non-NixOS linux
+  system, where we can't system level configuration, we'd probably want to set
+  these using home_manager, for example as
+
+  #+begin_src nix
+    home.sessionVariables = {
+      NIX_PATH = "$NIX_PATH:nixpkgs=<path/to/nixpkgs>:home-manager=<path/to/home-manager>";
+    };
+  #+end_src
+
+  but I'm filing this under "cross that bridge when we get there", since I'm
+  reluctant to muck with =$NIX_PATH= in multiple places.
