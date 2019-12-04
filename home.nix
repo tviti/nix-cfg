@@ -3,10 +3,6 @@
 let
   home_directory = builtins.getEnv "HOME";
   next = pkgs.callPackage ./pkgs/next { };
-  gmt = pkgs.callPackage ./pkgs/gmt {
-    inherit (pkgs.darwin.apple_sdk.frameworks)
-      Accelerate CoreGraphics CoreVideo;
-  };
 in rec {
   home = {
     packages = with pkgs; [
@@ -17,8 +13,6 @@ in rec {
       bibutils
       curl
       git
-      ghostscript
-      gmt
       myEmacs
       myR
       next
@@ -28,7 +22,7 @@ in rec {
       pass
       wget
       vim
-    ];
+    ] ++ myMappingTools;
 
     sessionVariables = {
       ASPELL_CONF = "conf ${xdg.configHome}/aspell/config;";
