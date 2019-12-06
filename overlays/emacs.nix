@@ -4,9 +4,8 @@ self: super:
 let
   # Use emacs-macport on Darwin systems
   package = if super.stdenv.isDarwin then super.emacsMacport else super.emacs;
-  customEmacsPackages = super.emacsPackages.overrideScope' (self: super: {
-    emacs = package;
-  });
+  customEmacsPackages =
+    super.emacsPackages.overrideScope' (self: super: { emacs = package; });
 in {
   myEmacs = customEmacsPackages.emacsWithPackages (epkgs:
     with epkgs; [
@@ -37,6 +36,7 @@ in {
       slime
       spacemacs-theme
       spaceline
+      stan-mode
       which-key
     ]);
 }
