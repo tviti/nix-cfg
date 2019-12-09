@@ -12,6 +12,7 @@ in {
       auctex
       company
       counsel
+      eglot
       ess
       evil
       evil-collection
@@ -20,7 +21,7 @@ in {
       elfeed
       elpy
       eyebrowse
-      flycheck
+      flymake
       highlight-numbers
       nix-mode
       magit

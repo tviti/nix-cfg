@@ -5,24 +5,27 @@ let
   next = pkgs.callPackage ./pkgs/next { };
 in rec {
   home = {
-    packages = with pkgs; [
-      aspell
-      aspellDicts.en
-      aspellDicts.en-computers
-      aspellDicts.en-science
-      bibutils
-      curl
-      git
-      myEmacs
-      myR
-      next
-      nixfmt # for emacs nix-mode
-      pandoc
-      haskellPackages.pandoc-citeproc
-      pass
-      wget
-      vim
-    ] ++ myMappingTools;
+    packages = with pkgs;
+      [
+        aspell
+        aspellDicts.en
+        aspellDicts.en-computers
+        aspellDicts.en-science
+        bibutils
+        curl
+        git
+        myEmacs
+        myR
+        next
+        nixfmt # for emacs nix-mode
+        pandoc
+        haskellPackages.pandoc-citeproc
+        pass
+        wget
+        vim
+        texlab # LSP server for latex
+        # lua53Packages.digestif # LSP server for latex
+      ] ++ myMappingTools;
 
     sessionVariables = {
       ASPELL_CONF = "conf ${xdg.configHome}/aspell/config;";
@@ -48,7 +51,7 @@ in rec {
 
     gpg.enable = true;
   };
-  
+
   xdg = {
     enable = true;
     configHome = "${home_directory}/.config";
