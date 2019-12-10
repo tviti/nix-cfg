@@ -3,6 +3,7 @@
 let
   home_directory = builtins.getEnv "HOME";
   next = pkgs.callPackage ./pkgs/next { };
+  texlab = pkgs.callPackage ./pkgs/texlab { };
 in rec {
   home = {
     packages = with pkgs;
