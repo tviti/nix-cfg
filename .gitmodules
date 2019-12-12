@@ -10,3 +10,6 @@
 [submodule "nix-src/nixpkgs"]
 	path = nix-src/nixpkgs
 	url = git@github.com:tviti/nixpkgs.git
+[submodule "overlays/emacs-overlay"]
+	path = overlays/emacs-overlay
+	url = https://github.com/nix-community/emacs-overlay
