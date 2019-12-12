@@ -1,6 +1,5 @@
-# open terminal.
-# cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
-cmd - return : emacsclient -e "(tviti/poplight-make-frame)"
+# open Eshell terminal
+shift + cmd - space : ~/.nix-profile/bin/emacsclient -e "(tviti/poplight-make-frame)"
 
 # focus window
 lalt - h : yabai -m window --focus west
