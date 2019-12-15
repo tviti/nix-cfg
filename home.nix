@@ -12,19 +12,21 @@ in rec {
         aspellDicts.en
         aspellDicts.en-computers
         aspellDicts.en-science
-        bibutils
+        # bibutils
         curl
         git
+        gitAndTools.git-annex
         myEmacs
         myR
-        next
+        # next
         nixfmt # for emacs nix-mode
         pandoc
+        pv
         haskellPackages.pandoc-citeproc
-        pass
+        #pass
         wget
         vim
-        texlab # LSP server for latex
+        # texlab # LSP server for latex
         # lua53Packages.digestif # LSP server for latex
       ] ++ myMappingTools;
 
@@ -39,8 +41,8 @@ in rec {
     bash = {
       enable = true;
       profileExtra = ''
-        export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
-        source ${home_directory}/.nix-profile/etc/profile.d/nix.sh
+        # export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
+        # source ${home_directory}/.nix-profile/etc/profile.d/nix.sh
       '';
     };
 
@@ -58,8 +60,8 @@ in rec {
     configHome = "${home_directory}/.config";
 
     configFile."next".source = ./config/next-cfg;
-    configFile."skhd/skhdrc".source = ./config/skhdrc;
-    configFile."yabai/yabairc".source = ./config/yabairc;
+    # configFile."skhd/skhdrc".source = ./config/skhdrc;
+    # configFile."yabai/yabairc".source = ./config/yabairc;
     configFile."aspell/config".text = ''
       dict-dir ${home_directory}/.nix-profile/lib/aspell
       home-dir ${home_directory}/Sync

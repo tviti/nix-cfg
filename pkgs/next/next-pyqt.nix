@@ -5,15 +5,9 @@ stdenv.mkDerivation {
   inherit (next) src version;
 
   buildInputs = [ pkgs.python3 ];
-  propagatedBuildInputs = [ pkgs.python3Packages.virtualenvwrapper ];
+  propagatedBuildInputs = with pkgs.python3Packages; [ pyqt5 pyqtwebengine ];
 
-  phases = [ "installPhase" ];
-
-  installPhase = ''
-    virtualenv $out
-    source $out/bin/activate
-    pip install pyqt5 PyQtWebEngine # This fails on CentOS for some reason
-  '';
+  phases = [ ];
 
   pathsToLink = [ ];
 

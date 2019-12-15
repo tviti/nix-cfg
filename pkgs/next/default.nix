@@ -40,10 +40,10 @@ in stdenv.mkDerivation rec {
   buildInputs = with pkgs; [ next-pyqt curl cacert dbus pass ];
 
   # Set the port to use the next-pyqt python env
-  configurePhase = ''
-    substituteInPlace ./ports/pyqt-webengine/next-pyqt-webengine.py \
-        --replace "#!/usr/bin/env python3" "#!${next-pyqt.out}/bin/python"
-  '';
+  # configurePhase = ''
+  #   substituteInPlace ./ports/pyqt-webengine/next-pyqt-webengine.py \
+  #       --replace "#!/usr/bin/env python3" "#!${next-pyqt.out}/bin/python"
+  # '';
 
   # Quicklisp will want to create a few hidden-/dot-dirs in $HOME (which will
   # fail due to nix' use of homeless-shelter), so we instead point it to $out

@@ -46,3 +46,9 @@
 
   but I'm filing this under "cross that bridge when we get there", since I'm
   reluctant to muck with =$NIX_PATH= in multiple places.
+* Submodules
+** emacs-overlay
+** home-manager
+** nixpkgs
+** nix-darwin
+** next-cfg

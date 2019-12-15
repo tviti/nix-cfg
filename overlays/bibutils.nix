@@ -18,6 +18,7 @@ self: super: {
     };
 
     # TODO: Tests don't pass on Darwin for some reason.
+    #doCheck = if super.stdenv.isDarwin then false else true;
     doCheck = if super.stdenv.isDarwin then false else true;
 
     configureFlags =
