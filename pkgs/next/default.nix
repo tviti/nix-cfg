@@ -14,14 +14,10 @@
    those nixpkgs also don't support Darwin (ASDF is the first to throw an
    error), hence this package uses quicklisp directly.  */
 
-{ pkgs, stdenv, fetchFromGitHub, sbcl, ... }:
+{ stdenv, fetchFromGitHub, sbcl, callPackage, lispPackages, libsForQt5 }:
 
 let
-  libfixposix = if stdenv.isDarwin then
-    pkgs.callPackage ../libfixposix { }
-  else
-    pkgs.libfixposix;
-  next-pyqt = pkgs.callPackage ./next-pyqt.nix { };
+  next-pyqt = libsForQt5.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
   name = "next";
   version = "v1.3.4";
@@ -36,14 +32,50 @@ in stdenv.mkDerivation rec {
   # Stripping destroys the generated SBCL image
   dontStrip = true;
 
-  nativeBuildInputs = [ pkgs.sbcl libfixposix ];
-  buildInputs = with pkgs; [ next-pyqt curl cacert dbus pass ];
+  nativeBuildInputs = [
+    sbcl
+  ] ++ (with lispPackages; [
+    prove-asdf
+    trivial-features
+  ]);
 
-  # Set the port to use the next-pyqt python env
-  # configurePhase = ''
-  #   substituteInPlace ./ports/pyqt-webengine/next-pyqt-webengine.py \
-  #       --replace "#!/usr/bin/env python3" "#!${next-pyqt.out}/bin/python"
-  # '';
+  buildInputs = with lispPackages; [
+    alexandria
+    bordeaux-threads
+    cl-annot
+    cl-ansi-text
+    cl-css
+    cl-hooks
+    cl-json
+    cl-markup
+    cl-ppcre
+    cl-ppcre-unicode
+    cl-prevalence
+    closer-mop
+    dbus
+    dexador
+    ironclad
+    local-time
+    log4cl
+    lparallel
+    mk-string-metrics
+    parenscript
+    quri
+    sqlite
+    str
+    swank
+    trivia
+    trivial-clipboard
+    trivial-types
+    unix-opts
+  ];
+
+  propagatedBuildInputs = [ next-pyqt ];
+
+  prePatch = ''
+    substituteInPlace source/ports/gtk-webkit.lisp \
+      --replace "next-gtk-webkit" "${next-pyqt}/next-pyqt-webengine/next-pyqt-webengine"
+  '';
 
   # Quicklisp will want to create a few hidden-/dot-dirs in $HOME (which will
   # fail due to nix' use of homeless-shelter), so we instead point it to $out
@@ -52,7 +84,10 @@ in stdenv.mkDerivation rec {
     mkdir -p $out/Applications/Next.app/Contents/MacOS/
     make app-bundle
   '' else ''
-    make next
+    common-lisp.sh --eval "(require :asdf)" \
+                   --eval "(asdf:load-asd (truename \"next.asd\") :name \"next\")" \
+                   --eval '(asdf:make :next)' \
+                   --quit
   '';
 
   installPhase = if stdenv.isDarwin then ''

@@ -18,7 +18,7 @@ in rec {
         gitAndTools.git-annex
         myEmacs
         myR
-        # next
+        next
         nixfmt # for emacs nix-mode
         pandoc
         pv
