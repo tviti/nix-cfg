@@ -24,6 +24,7 @@ in rec {
         nixfmt # for emacs nix-mode
         pandoc
         pv
+        spotify
         haskellPackages.pandoc-citeproc
         #pass
         wget
