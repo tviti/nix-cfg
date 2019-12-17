@@ -1,5 +1,6 @@
-{ config, pkgs, ... }:
+# This is a machine-specific nix-darwin configuration file.
 
+{ config, pkgs, ... }:
 
 let
   yabai = pkgs.callPackage ../pkgs/yabai {
@@ -60,7 +61,7 @@ in {
   
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+  environment.darwinConfig = "$HOME/.config/nixpkgs/machines/R-Daneel.nix";
 
   # Auto upgrade nix package and the daemon service.
   # services.nix-daemon.enable = true;

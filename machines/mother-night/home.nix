@@ -2,8 +2,8 @@
 
 let
   home_directory = builtins.getEnv "HOME";
-  next = pkgs.callPackage ./pkgs/next { };
-  texlab = pkgs.callPackage ./pkgs/texlab { };
+  next = pkgs.callPackage ../../pkgs/next { };
+  texlab = pkgs.callPackage ../../pkgs/texlab { };
 in rec {
   home = {
     packages = with pkgs;
@@ -52,7 +52,7 @@ in rec {
       userEmail = "tviti@hawaii.edu";
     };
 
-    gpg.enable = true;
+    # gpg.enable = true;
   };
 
   xdg = {
@@ -79,4 +79,5 @@ in rec {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
 }
