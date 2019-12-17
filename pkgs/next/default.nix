@@ -14,7 +14,7 @@
    those nixpkgs also don't support Darwin (ASDF is the first to throw an
    error), hence this package uses quicklisp directly.  */
 
-{ stdenv, fetchFromGitHub, sbcl, callPackage, lispPackages, libsForQt5 }:
+{ stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, libsForQt5 }:
 
 let
   next-pyqt = libsForQt5.callPackage ./next-pyqt.nix { };
@@ -39,7 +39,10 @@ in stdenv.mkDerivation rec {
     trivial-features
   ]);
 
-  buildInputs = with lispPackages; [
+  buildInputs = [
+    xclip
+    pass
+  ] ++ (with lispPackages; [
     alexandria
     bordeaux-threads
     cl-annot
@@ -68,7 +71,7 @@ in stdenv.mkDerivation rec {
     trivial-clipboard
     trivial-types
     unix-opts
-  ];
+  ]);
 
   propagatedBuildInputs = [ next-pyqt ];
 
