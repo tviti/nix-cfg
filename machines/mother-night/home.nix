@@ -6,6 +6,7 @@ let
   config-dir = ../../config;
   next = pkgs.callPackage (pkg-dir + "/next") { };
   texlab = pkgs.callPackage (pkg-dir + "/texlab") { };
+  kitty-themes = pkgs.callPackage (pkg-dir + "/kitty-themes") { };
 in rec {
   home = {
     packages = with pkgs;
@@ -31,6 +32,7 @@ in rec {
         vim
         # texlab # LSP server for latex
         # lua53Packages.digestif # LSP server for latex
+        kitty-themes
       ] ++ myMappingTools;
 
     sessionVariables = {
@@ -64,6 +66,7 @@ in rec {
 
     configFile."next".source = config-dir + "/next-cfg";
     configFile."i3".source = config-dir + "/i3";
+
     configFile."aspell/config".text = ''
       dict-dir ${home-dir}/.nix-profile/lib/aspell
       home-dir ${home-dir}/Sync
@@ -72,6 +75,11 @@ in rec {
       master en_US
       extra-dicts en_US-science.rws
       add-extra-dicts en-computers.rws
+    '';
+
+    configFile."kitty/kitty.conf".text = ''
+      # Load a theme
+      include ${kitty-themes}/share/kitty-themes/gruvbox_light.conf
     '';
   };
 
