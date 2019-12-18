@@ -121,6 +121,9 @@ in {
       extraPackages = with pkgs; [ dmenu i3status i3lock ];
     };
     desktopManager.default = "none";
+
+    # Multiple monitor configuration
+    xrandrHeads = [ "eDP-1" "HDMI-1" ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
