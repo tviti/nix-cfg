@@ -5,22 +5,22 @@
 { config, pkgs, ... }:
 
 let
-  hostname = "mother-night"
-  nixdir = "/home/tviti/.config/nixpkgs";
-  machinedir = "${nixdir}/${hostname}";
+  hostname = "mother-night";
+  nix-dir = "/home/tviti/.config/nixpkgs";
+  machine-dir = "${nix-dir}/machines/${hostname}";
 in {
   imports = [ 
     ./private/hardware-configuration.nix # Include the results of the hardware scan.
   ];
 
-  environment.variables = { HOME_MANAGER_CONFIG = "${machinedir}/home.nix"; };
+  environment.variables = { HOME_MANAGER_CONFIG = "${machine-dir}/home.nix"; };
 
   nix = {
     nixPath = [
       # If you move the repo, make sure to change these as well!
-      "nixpkgs=${nixdir}/nix-src/nixpkgs"
-      "home-manager=${nixdir}/nix-src/home-manager"
-      "nixos-config=${machinedir}/configuration.nix"
+      "nixpkgs=${nix-dir}/nix-src/nixpkgs"
+      "home-manager=${nix-dir}/nix-src/home-manager"
+      "nixos-config=${machine-dir}/configuration.nix"
     ];
   };
 
