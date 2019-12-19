@@ -1,9 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  home_directory = builtins.getEnv "HOME";
-  next = pkgs.callPackage ../../pkgs/next { };
-  texlab = pkgs.callPackage ../../pkgs/texlab { };
+  home-dir = builtins.getEnv "HOME";
+  pkg-dir = ../../pkgs;
+  config-dir = ../../config;
+  next = pkgs.callPackage (pkg-dir + "/next") { };
+  texlab = pkgs.callPackage (pkg-dir + "/texlab") { };
 in rec {
   home = {
     packages = with pkgs;
@@ -42,7 +44,7 @@ in rec {
       enable = true;
       profileExtra = ''
         # export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
-        # source ${home_directory}/.nix-profile/etc/profile.d/nix.sh
+        # source ${home-dir}/.nix-profile/etc/profile.d/nix.sh
       '';
     };
 
@@ -57,15 +59,13 @@ in rec {
 
   xdg = {
     enable = true;
-    configHome = "${home_directory}/.config";
+    configHome = "${home-dir}/.config";
 
-    configFile."next".source = ./config/next-cfg;
-    # configFile."skhd/skhdrc".source = ./config/skhdrc;
-    # configFile."yabai/yabairc".source = ./config/yabairc;
+    configFile."next".source = config-dir + "/next-cfg";
     configFile."aspell/config".text = ''
-      dict-dir ${home_directory}/.nix-profile/lib/aspell
-      home-dir ${home_directory}/Sync
-      personal ${home_directory}/Sync/.aspell.en.pws
+      dict-dir ${home-dir}/.nix-profile/lib/aspell
+      home-dir ${home-dir}/Sync
+      personal ${home-dir}/Sync/.aspell.en.pws
 
       master en_US
       extra-dicts en_US-science.rws
@@ -73,7 +73,7 @@ in rec {
     '';
   };
 
-  home.file.".chktexrc".source = ./config/chktexrc;
+  home.file.".chktexrc".source = config-dir + "/chktexrc";
 
   services.syncthing.enable = true;
 
