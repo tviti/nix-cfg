@@ -10,6 +10,7 @@ in {
   myEmacs = customEmacsPackages.emacsWithPackages (epkgs:
     with epkgs; [
       auctex
+      bash-completion
       company
       counsel
       eglot
