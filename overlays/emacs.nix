@@ -24,6 +24,7 @@ in {
       flymake
       highlight-numbers
       nix-mode
+      direnv
       magit
       magit-annex
       matlab-mode

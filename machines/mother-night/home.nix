@@ -17,6 +17,7 @@ in rec {
         aspellDicts.en-science
         # bibutils
         curl
+        direnv
         git
         gitAndTools.git-annex
         myEmacs
@@ -62,6 +63,8 @@ in rec {
 
   xdg = {
     enable = true;
+
+    # Configuration files
     configHome = "${home-dir}/.config";
 
     configFile."next".source = config-dir + "/next-cfg";
