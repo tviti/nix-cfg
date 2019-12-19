@@ -26,6 +26,7 @@ in rec {
         nixfmt # for emacs nix-mode
         pandoc
         pv
+        rclone
         spotify
         haskellPackages.pandoc-citeproc
         #pass
