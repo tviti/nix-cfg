@@ -100,6 +100,12 @@ in stdenv.mkDerivation rec {
     ln -s $out/Applications/Next.app/Contents/MacOS/next $out/bin/next
   '' else ''
     install -D -m0755 next $out/bin/next
+
+    substituteInPlace assets/next.desktop \
+      --replace "VERSION" "${version}"
+
+    mkdir -p $out/share/applications
+    cp assets/next.desktop $out/share/applications/next.desktop
   '';
 
   meta = with stdenv; { platforms = [ "x86_64-linux" "x86_64-darwin" ]; };
