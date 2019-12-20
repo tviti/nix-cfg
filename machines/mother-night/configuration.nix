@@ -117,6 +117,8 @@ in {
 
     # Enable touchpad support.
     libinput.enable = true;
+    libinput.naturalScrolling = true;
+
 
     # Enable i3wm
     desktopManager.default = "none";
