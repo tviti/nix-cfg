@@ -66,7 +66,10 @@ in {
     xclip
     kitty
     hfsprogs
+    displaylink
   ];
+
+  nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -116,14 +119,19 @@ in {
     libinput.enable = true;
 
     # Enable i3wm
+    desktopManager.default = "none";
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [ dmenu i3status i3lock ];
+      extraSessionCommands = ''
+        # Multiple monitor configuration
+        xrandr --output HDMI-1 --auto --above eDP-1
+        xrandr --output DVI-I-2-1 --auto --right-of HDMI-1
+      '';
     };
-    desktopManager.default = "none";
 
-    # Multiple monitor configuration
-    xrandrHeads = [ "eDP-1" "HDMI-1" ];
+    # Enable insignia USB2HDMI dongle
+    videoDrivers = [ "displaylink" ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
