@@ -8,12 +8,13 @@
 
    Since the nixpkgs libfixposix derivation does not support Darwin, I have
    packaged it myself for use on macOS machines (with the .nix file based on the
-   brew recipe). */
+   brew recipe).
+*/
 
-{ stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, libsForQt5, libfixposix }:
+{ stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages
+, libsForQt5, libfixposix }:
 
-let
-  next-pyqt = libsForQt5.callPackage ./next-pyqt.nix { };
+let next-pyqt = libsForQt5.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
   name = "next";
   version = "v1.3.4";
@@ -28,17 +29,10 @@ in stdenv.mkDerivation rec {
   # Stripping destroys the generated SBCL image
   dontStrip = true;
 
-  nativeBuildInputs = [
-    sbcl
-  ] ++ (with lispPackages; [
-    prove-asdf
-    trivial-features
-  ]);
+  nativeBuildInputs = [ sbcl ]
+    ++ (with lispPackages; [ prove-asdf trivial-features ]);
 
-  buildInputs = [
-    xclip
-    pass
-  ] ++ (with lispPackages; [
+  buildInputs = [ xclip pass ] ++ (with lispPackages; [
     alexandria
     bordeaux-threads
     cl-annot
