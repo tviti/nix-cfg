@@ -7,14 +7,10 @@
    is not using the official next source).
 
    Since the nixpkgs libfixposix derivation does not support Darwin, I have
-   packaged it myself (with the .nix file based on the brew recipe). It would
-   probably be better to actually pass this dependency as an argument, but since
-   we rely on this specific derivation, I just call it directly from
-   here. Ideally, we would also let nix handle the quicklisp dependencies, but
-   those nixpkgs also don't support Darwin (ASDF is the first to throw an
-   error), hence this package uses quicklisp directly.  */
+   packaged it myself for use on macOS machines (with the .nix file based on the
+   brew recipe). */
 
-{ stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, libsForQt5 }:
+{ stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, libsForQt5, libfixposix }:
 
 let
   next-pyqt = libsForQt5.callPackage ./next-pyqt.nix { };
