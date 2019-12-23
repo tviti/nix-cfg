@@ -1,10 +1,9 @@
-{ qtbase, stdenv, wrapQtAppsHook, python3, libsForQt5, callPackage}:
+{ qtbase, stdenv, wrapQtAppsHook, python3, libsForQt5, callPackage, next }:
 
 let
-  next = callPackage /home/tviti/.config/nixpkgs/pkgs/next { };
-  # mypyqtwebengine = libsForQt5.callPackage /home/tviti/.config/nixpkgs/pkgs/pyqtwebengine/default.nix { };
+  next = callPackage ~/.config/nixpkgs/pkgs/next { };
   python-pkgs = python-packages: with python-packages ;[
-    pyqt5 pyqtwebengine #mypyqtwebengine
+    pyqt5 pyqtwebengine
   ];
   next-python = python3.withPackages python-pkgs;
 in stdenv.mkDerivation rec {
@@ -48,6 +47,6 @@ in stdenv.mkDerivation rec {
       "''${qtWrapperArgs[@]}"
   '';
 
-  meta = with stdenv; { platforms = [ "x86_64-linux" "x86_64-darwin" ]; };
+  meta = with stdenv; { platforms = [ "x86_64-linux" ]; };
 }
 

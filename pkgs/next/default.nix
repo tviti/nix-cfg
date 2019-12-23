@@ -11,7 +11,11 @@
 { stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, curl
 , cacert, libsForQt5, libfixposix }:
 
-let next-pyqt = libsForQt5.callPackage ./next-pyqt.nix { };
+let
+  next-pyqt = if stdenv.isDarwin then
+    callPackage ./next-pyqt-darwin.nix { }
+  else
+    libsForQt5.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
   name = "next";
   version = "v1.3.4";
@@ -27,7 +31,7 @@ in stdenv.mkDerivation rec {
   dontStrip = true;
 
   nativeBuildInputs = if stdenv.isDarwin then
-    [ sbcl ]
+    [ sbcl libfixposix ]
   else
     [ sbcl ] ++ (with lispPackages; [ prove-asdf trivial-features ]);
 
@@ -71,9 +75,10 @@ in stdenv.mkDerivation rec {
 
   # On linux, Next defaults to gtk-webkit, so here we do a dirty patch to
   # force it to instead use pyqtwebengine.
-  prePatch = if stdenv.isDarwin then
-    ""
-  else ''
+  prePatch = if stdenv.isDarwin then ''
+    substituteInPlace ./ports/pyqt-webengine/next-pyqt-webengine.py \
+        --replace "#!/usr/bin/env python3" "#!${next-pyqt}/bin/python"
+  '' else ''
     substituteInPlace source/ports/gtk-webkit.lisp \
       --replace "next-gtk-webkit" \
                 "${next-pyqt}/next-pyqt-webengine/next-pyqt-webengine"
