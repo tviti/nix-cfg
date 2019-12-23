@@ -1,18 +1,15 @@
-/* A derivation for building Next browser with the PyQtWebEngine frontend. This was
-   originally written to install on a Darwin system, and I have had problems with
-   getting it working on a CentOS 7 machine (the next-pyqt derivation fails to
-   install PyQt5 and PyQtWebEngine).
-
-   Note that this derivation clones from my own fork of the next repo (i.e. this
-   is not using the official next source).
+/* A derivation for building Next browser with the PyQtWebEngine frontend,
+   cloning from my own fork of the next repo (i.e. this is not using the
+   official next source). This was originally written to install on a Darwin
+   system. Linux specific bits were largely taken from the nixpkgs derivation.
 
    Since the nixpkgs libfixposix derivation does not support Darwin, I have
    packaged it myself for use on macOS machines (with the .nix file based on the
    brew recipe).
 */
 
-{ stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages
-, libsForQt5, libfixposix }:
+{ stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, curl
+, cacert, libsForQt5, libfixposix }:
 
 let next-pyqt = libsForQt5.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
@@ -29,45 +26,57 @@ in stdenv.mkDerivation rec {
   # Stripping destroys the generated SBCL image
   dontStrip = true;
 
-  nativeBuildInputs = [ sbcl ]
-    ++ (with lispPackages; [ prove-asdf trivial-features ]);
+  nativeBuildInputs = if stdenv.isDarwin then
+    [ sbcl ]
+  else
+    [ sbcl ] ++ (with lispPackages; [ prove-asdf trivial-features ]);
 
-  buildInputs = [ xclip pass ] ++ (with lispPackages; [
-    alexandria
-    bordeaux-threads
-    cl-annot
-    cl-ansi-text
-    cl-css
-    cl-hooks
-    cl-json
-    cl-markup
-    cl-ppcre
-    cl-ppcre-unicode
-    cl-prevalence
-    closer-mop
-    dbus
-    dexador
-    ironclad
-    local-time
-    log4cl
-    lparallel
-    mk-string-metrics
-    parenscript
-    quri
-    sqlite
-    str
-    swank
-    trivia
-    trivial-clipboard
-    trivial-types
-    unix-opts
-  ]);
+  buildInputs = if stdenv.isDarwin then [
+    curl
+    cacert
+    pass
+  ] else
+    [ xclip pass ] ++ (with lispPackages; [
+      alexandria
+      bordeaux-threads
+      cl-annot
+      cl-ansi-text
+      cl-css
+      cl-hooks
+      cl-json
+      cl-markup
+      cl-ppcre
+      cl-ppcre-unicode
+      cl-prevalence
+      closer-mop
+      dbus
+      dexador
+      ironclad
+      local-time
+      log4cl
+      lparallel
+      mk-string-metrics
+      parenscript
+      quri
+      sqlite
+      str
+      swank
+      trivia
+      trivial-clipboard
+      trivial-types
+      unix-opts
+    ]);
 
   propagatedBuildInputs = [ next-pyqt ];
 
-  prePatch = ''
+  # On linux, Next defaults to gtk-webkit, so here we do a dirty patch to
+  # force it to instead use pyqtwebengine.
+  prePatch = if stdenv.isDarwin then
+    ""
+  else ''
     substituteInPlace source/ports/gtk-webkit.lisp \
-      --replace "next-gtk-webkit" "${next-pyqt}/next-pyqt-webengine/next-pyqt-webengine"
+      --replace "next-gtk-webkit" \
+                "${next-pyqt}/next-pyqt-webengine/next-pyqt-webengine"
   '';
 
   # Quicklisp will want to create a few hidden-/dot-dirs in $HOME (which will
@@ -99,5 +108,4 @@ in stdenv.mkDerivation rec {
   '';
 
   meta = with stdenv; { platforms = [ "x86_64-linux" "x86_64-darwin" ]; };
-
 }
