@@ -15,29 +15,19 @@ in {
     (nix-dir + "/configuration-common.nix")
   ];
 
+  # If you move the repo, make sure to change these as well!
+  environment.darwinConfig = "${machine-dir}/configuration.nix";
   nix = {
     nixPath = [
-      # If you move the repo, make sure to change these as well!
       "nixpkgs=${nix-dir}/nix-src/nixpkgs"
       "home-manager=${nix-dir}/nix-src/home-manager"
       "darwin=${nix-dir}/nix-src/nix-darwin"
-      "darwin-config=${machine-dir}/configuration.nix"
+      # "darwin-config=${machine-dir}/configuration.nix"
     ];
   };
 
   # Make sure nix is also aware of our relocated home-manager cfg
   environment.variables = { HOME_MANAGER_CONFIG = "${machine-dir}/home.nix"; };
-
-  nixpkgs = {
-    # Taken from John Wiegley's nix-config repo
-    overlays =
-      let path = nix-dir + "/overlays"; in with builtins;
-      map (n: import (path + ("/" + n)))
-          (filter (n: match ".*\\.nix" n != null ||
-                      pathExists (path + ("/" + n + "/default.nix")))
-                  (attrNames (readDir path)));
-  };
-
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
