@@ -61,15 +61,28 @@ in {
     git
     firefox
     pass
+    pigz # Parallel version of gzip
     gnupg
     pinentry-qt
     xclip
     kitty
     hfsprogs
     displaylink
+    lsof
   ];
 
   nixpkgs.config.allowUnfree = true;
+
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      dejavu_fonts
+      fira-code
+      hack-font
+      inconsolata
+      source-code-pro
+    ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -118,7 +131,6 @@ in {
     # Enable touchpad support.
     libinput.enable = true;
     libinput.naturalScrolling = true;
-
 
     # Enable i3wm
     desktopManager.default = "none";
