@@ -44,11 +44,19 @@ in {
     skhd
     yabai
     xquartz # NOTE: You should run $ xquartz-install after installation
+    synergy
   ];
 
-  services.yabai.package = yabai;
   services.skhd.enable = true;
-  services.yabai.enable = true;
+
+  services.yabai = {
+    enable = true;
+    package = yabai;
+  };
+
+  services.synergy = {
+    inherit (import ./private/synergy.nix) client;
+  };
   
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
