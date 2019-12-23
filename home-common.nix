@@ -23,7 +23,7 @@ in rec {
         curl
         direnv
         git
-        gitAndTools.git-annex
+        # gitAndTools.git-annex # Installation fails on darwin
         myEmacs
         myR
         next
@@ -31,7 +31,6 @@ in rec {
         pandoc
         pv
         rclone
-        spotify
         haskellPackages.pandoc-citeproc
         #pass
         wget
