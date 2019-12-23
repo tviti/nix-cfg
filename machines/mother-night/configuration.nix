@@ -13,6 +13,7 @@ in {
     ./private/hardware-configuration.nix # Include the results of the hardware scan.
   ];
 
+  # Make sure nix is also aware of our relocated home-manager cfg
   environment.variables = { HOME_MANAGER_CONFIG = "${machine-dir}/home.nix"; };
 
   nix = {
@@ -56,41 +57,20 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
-    vim
-    git
+    displaylink
     firefox
-    pass
+    hfsprogs
+    kitty
     pigz # Parallel version of gzip
-    gnupg
     pinentry-qt
     xclip
-    kitty
-    hfsprogs
-    displaylink
-    lsof
   ];
-
-  nixpkgs.config.allowUnfree = true;
-
-  fonts = {
-    enableFontDir = true;
-    fonts = with pkgs; [
-      dejavu_fonts
-      fira-code
-      hack-font
-      inconsolata
-      source-code-pro
-    ];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   programs.gnupg.agent = {
-    enable = true;
     pinentryFlavor = "qt";
-    enableSSHSupport = true;
   };
 
   # List services that you want to enable:

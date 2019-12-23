@@ -3,41 +3,41 @@
 { config, pkgs, ... }:
 
 let
-  yabai = pkgs.callPackage ../pkgs/yabai {
+  nix-dir = "/Users/taylor/.config/nixpkgs";
+  machine-dir = nix-dir + "/machines/R-Daneel";
+  pkg-dir = nix-dir + "/pkgs";
+  yabai = pkgs.callPackage (pkg-dir + "/yabai") {
     inherit (pkgs.darwin.apple_sdk.frameworks) Carbon Cocoa ScriptingBridge;
   };
 in {
-  imports = [ ../services/yabai.nix ];
+  imports = [
+    (nix-dir + "/services/yabai.nix")
+    (nix-dir + "/configuration-common.nix")
+  ];
 
   nix = {
     nixPath = [
       # If you move the repo, make sure to change these as well!
-      "nixpkgs=$HOME/.config/nixpkgs/nix-src/nixpkgs"
-      "home-manager=$HOME/.config/nixpkgs/nix-src/home-manager"
-      "darwin=$HOME/.config/nixpkgs/nix-src/nix-darwin"
+      "nixpkgs=${nix-dir}/nix-src/nixpkgs"
+      "home-manager=${nix-dir}/nix-src/home-manager"
+      "darwin=${nix-dir}/nix-src/nix-darwin"
+      "darwin-config=${machine-dir}/configuration.nix"
     ];
   };
+
+  # Make sure nix is also aware of our relocated home-manager cfg
+  environment.variables = { HOME_MANAGER_CONFIG = "${machine-dir}/home.nix"; };
 
   nixpkgs = {
     # Taken from John Wiegley's nix-config repo
     overlays =
-      let path = ../overlays; in with builtins;
+      let path = nix-dir + "/overlays"; in with builtins;
       map (n: import (path + ("/" + n)))
           (filter (n: match ".*\\.nix" n != null ||
                       pathExists (path + ("/" + n + "/default.nix")))
                   (attrNames (readDir path)));
   };
 
-  fonts = {
-    enableFontDir = true;
-    fonts = with pkgs; [
-      dejavu_fonts
-      fira-code
-      hack-font
-      inconsolata
-      source-code-pro
-    ];
-  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -49,7 +49,6 @@ in {
   ];
 
   services.skhd.enable = true;
-
   services.yabai = {
     enable = true;
     package = yabai;
@@ -59,10 +58,6 @@ in {
     inherit (import ./private/synergy.nix) client;
   };
   
-  # Use a custom configuration.nix location.
-  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  environment.darwinConfig = "$HOME/.config/nixpkgs/machines/R-Daneel.nix";
-
   # Auto upgrade nix package and the daemon service.
   # services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
@@ -88,4 +83,7 @@ in {
       AppleFontSmoothing = 1;
     };
   };
+
+  # Set your time zone.
+  time.timeZone = "Pacific/Honolulu";
 }
