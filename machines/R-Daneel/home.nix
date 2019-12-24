@@ -1,9 +1,14 @@
 { config, pkgs, ... }:
 
 let
+  nix-dir = "/Users/taylor/.config/nixpkgs";
   home_directory = builtins.getEnv "HOME";
   config-dir = ../../config;
 in rec {
+  imports = [
+    (nix-dir + "/home-common.nix")
+  ];
+  
   home.packages = with pkgs;
     [
       bibutils
