@@ -1,6 +1,18 @@
 { config, pkgs, stdenv, ... }:
 
-{
+let
+  nix-dir = "/Users/taylor/.config/nixpkgs";
+in rec {
+  nixpkgs = {
+    # Taken from John Wiegley's nix-config repo
+    overlays =
+      let path = nix-dir + "/overlays"; in with builtins;
+      map (n: import (path + ("/" + n)))
+          (filter (n: match ".*\\.nix" n != null ||
+                      pathExists (path + ("/" + n + "/default.nix")))
+                  (attrNames (readDir path)));
+  };
+
   environment.systemPackages = with pkgs; [
     git
     gnupg
