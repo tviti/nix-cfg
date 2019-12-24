@@ -4,12 +4,7 @@ let
   home-dir = builtins.getEnv "HOME";
   pkg-dir = ./pkgs;
   config-dir = ./config;
-  next = pkgs.callPackage (pkg-dir + "/next") {
-    libfixposix = if stdenv.isDarwin then
-      pkgs.callPackage (pkg-dir + "/libfixposix") { }
-    else
-      pkgs.libfixposix;
-  };
+  next = pkgs.callPackage (pkg-dir + "/next") { };
   texlab = pkgs.callPackage (pkg-dir + "/texlab") { };
 in rec {
   home = {
