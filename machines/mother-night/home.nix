@@ -8,7 +8,11 @@ in rec {
     ../../home-common.nix
   ];
 
-  home.packages = [ kitty-themes ];
+  home.packages = [
+    kitty-themes
+    pkgs.spotify
+    pkgs.gitAndTools.git-annex
+  ];
 
   xdg.configFile."kitty/kitty.conf".text = ''
     # Load a theme
