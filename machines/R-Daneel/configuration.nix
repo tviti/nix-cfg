@@ -15,6 +15,8 @@ in {
     (nix-dir + "/configuration-common.nix")
   ];
 
+  common-config.nix-dir = nix-dir;
+  
   # If you move the repo, make sure to change these as well!
   environment.darwinConfig = "${machine-dir}/configuration.nix";
   nix = {

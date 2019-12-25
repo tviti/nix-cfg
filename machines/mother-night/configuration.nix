@@ -11,7 +11,10 @@ let
 in {
   imports = [ 
     ./private/hardware-configuration.nix # Include the results of the hardware scan.
+    (nix-dir + "/configuration-common.nix")
   ];
+
+  common-config.nix-dir = nix-dir;
 
   # Make sure nix is also aware of our relocated home-manager cfg
   environment.variables = { HOME_MANAGER_CONFIG = "${machine-dir}/home.nix"; };
