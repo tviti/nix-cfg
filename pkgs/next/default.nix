@@ -23,8 +23,8 @@ in stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "tviti";
     repo = "next";
-    rev = "ba0f1fc1cfa09fee544d61cf6e3848e1e0b7aa57";
-    sha256 = "0c6xdnbpyydwhg5pdp1498wmmgg0bd1drypyl2rxpagibbmsx9kd";
+    rev = "467f8cd167990f4067d9e79de32be1871478e16c";
+    sha256 = "0b10x1svq9s29p29darmw272ll5nbzqm01dwlw4vhnn71lvpwsj3";
   };
 
   # Stripping destroys the generated SBCL image
