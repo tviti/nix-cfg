@@ -1,11 +1,12 @@
 { config, pkgs, stdenv, ... }:
 
 let
-  pkg-dir = ../../pkgs;
+  nix-dir = "/home/tviti/.config/nixpkgs";
+  pkg-dir = nix-dir + "/pkgs";
   kitty-themes = pkgs.callPackage (pkg-dir + "/kitty-themes") { };
 in rec {
   imports = [
-    ../../home-common.nix
+    (nix-dir + "/home-common.nix")
   ];
 
   home.packages = [
