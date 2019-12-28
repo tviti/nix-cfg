@@ -26,6 +26,7 @@ in {
       lsof
       pass
       pigz
+      python3
       synergy
       vim
       wget
@@ -47,7 +48,7 @@ in {
 
     programs.gnupg.agent = {
       enable = true;
-      enableSSHSupport = true;
+      # enableSSHSupport = true;
     };
   };
 }
