@@ -15,10 +15,11 @@
 * Folders
   - config: Misc. dotfiles that should be symlinked by home_manager. Also an
     appropriate place to place =.nix= files that manage user level configs.
-  - darwin: System level configuration (=darwin/configuration.nix= is used by nix-darwin).
-  - overlays: Nix overlays (primarily used to override default package attrs).
+  - machines: Machine specific files (e.g. =configuration.nix= and =home.nix=).
+  - overlays: Nix overlays (includes a clone of [[https://github.com/nix-community/emacs-overlay][emacs-overlay]]).
   - pkgs: Custom package definitions.
-  - services: System level service definitions (used by nix-darwin).
+  - services: System level service definitions.
+  - nix-src: Source repos for nix tooling (e.g. home-manager).
 * $NIX_PATH
   I am currently experimenting with keeping local copies of the nixpkgs,
   home_manager, and nix-darwin repos (located in =./nix-src=), with all
@@ -52,3 +53,4 @@
 ** nixpkgs
 ** nix-darwin
 ** next-cfg
+   
