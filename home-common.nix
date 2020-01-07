@@ -19,6 +19,7 @@ in rec {
         direnv
         git
         # gitAndTools.git-annex # Installation fails on darwin
+        globus-cli
         myEmacs
         myR
         next
