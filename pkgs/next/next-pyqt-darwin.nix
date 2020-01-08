@@ -1,11 +1,11 @@
-{ stdenv, python3, python3Packages, next }:
+{ stdenv, python38, python38Packages, next }:
 
 stdenv.mkDerivation {
   name = "next-pyqt";
   inherit (next) src version;
 
-  buildInputs = [ python3 ];
-  propagatedBuildInputs = [ python3Packages.virtualenvwrapper ];
+  buildInputs = [ python38 ];
+  propagatedBuildInputs = [ python38Packages.virtualenvwrapper ];
 
   phases = [ "installPhase" ];
 
