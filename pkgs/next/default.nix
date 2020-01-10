@@ -6,7 +6,9 @@
    Since the nixpkgs libfixposix derivation does not support Darwin, I have
    packaged it myself for use on macOS machines (with the .nix file based on the
    brew recipe).
-*/
+
+   Note that the macOS derivation is very "dirty" my nix-an standards, as it
+pulls in dependencies using pip and quicklisp directly.  */
 
 { stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, curl
 , cacert, libsForQt5, libfixposix }:
@@ -23,8 +25,8 @@ in stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "tviti";
     repo = "next";
-    rev = "467f8cd167990f4067d9e79de32be1871478e16c";
-    sha256 = "0b10x1svq9s29p29darmw272ll5nbzqm01dwlw4vhnn71lvpwsj3";
+    rev = "57cb6b3ebb185d5eda0df7f53303d50c83ccd1db";
+    sha256 = "1c1kl3ddp33ydzrq27ihfwg3xaiaqlxz9s6rcnwdwkb918igrx9z";
   };
 
   # Stripping destroys the generated SBCL image
