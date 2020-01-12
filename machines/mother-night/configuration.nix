@@ -135,6 +135,13 @@ in {
     videoDrivers = [ "displaylink" ];
   };
 
+  services.logind = {
+    extraConfig = ''
+      IdleAction=lock
+      IdleActionSec=900
+    '';
+  };
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tviti = {
     isNormalUser = true;
