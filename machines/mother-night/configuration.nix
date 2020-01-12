@@ -121,9 +121,13 @@ in {
       enable = true;
       extraPackages = with pkgs; [ dmenu i3status i3lock ];
       extraSessionCommands = ''
-        # Multiple monitor configuration
-        xrandr --output HDMI-1 --auto --above eDP-1
-        xrandr --output DVI-I-2-1 --auto --right-of HDMI-1
+        # Multiple monitor configuration. Note that the laptop's builtin screen
+        # will still be enabled (even if the lid is closed). This is because if
+        # we boot with the builtin screen disabled, but there are no external
+        # monitors connected, then we are fucked with no way to re-enable the
+        # builtin screen.
+        xrandr --output HDMI-1 --auto --above eDP-1 # DELL
+        xrandr --output DVI-I-2-1 --auto --right-of HDMI-1 # SAMSUNG
       '';
     };
 
