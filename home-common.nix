@@ -5,7 +5,6 @@ let
   pkg-dir = ./pkgs;
   config-dir = ./config;
   next = pkgs.callPackage (pkg-dir + "/next") { };
-  texlab = pkgs.callPackage (pkg-dir + "/texlab") { };
 in rec {
   home = {
     packages = with pkgs;
@@ -31,7 +30,7 @@ in rec {
         #pass
         wget
         vim
-        # texlab # LSP server for latex
+        texlab # LSP server for latex
         # lua53Packages.digestif # LSP server for latex
         # kitty-themes
       ] ++ myMappingTools;
