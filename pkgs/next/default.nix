@@ -63,7 +63,9 @@ in stdenv.mkDerivation rec {
       lparallel
       mk-string-metrics
       parenscript
+      plump
       quri
+      serapeum
       sqlite
       str
       swank
