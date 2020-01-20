@@ -26,6 +26,7 @@ in rec {
         pandoc
         pv
         rclone
+        subversion
         haskellPackages.pandoc-citeproc
         #pass
         wget
