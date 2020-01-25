@@ -16,7 +16,7 @@ in rec {
         # bibutils
         curl
         direnv
-        git
+        gitFull
         # gitAndTools.git-annex # Installation fails on darwin
         globus-cli
         myEmacs
