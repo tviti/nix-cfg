@@ -21,7 +21,7 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      git
+      gitFull
       gnupg
       lsof
       pass

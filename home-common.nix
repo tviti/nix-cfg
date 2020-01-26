@@ -52,6 +52,7 @@ in rec {
       enable = true;
       userName = "Taylor Viti";
       userEmail = "tviti@hawaii.edu";
+      package = pkgs.gitFull;
     };
 
     # gpg.enable = true;
