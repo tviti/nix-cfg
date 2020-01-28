@@ -2,6 +2,7 @@
 
 let
   home-dir = builtins.getEnv "HOME";
+  tmp-dir = "/tmp";
   pkg-dir = ./pkgs;
   config-dir = ./config;
   next = pkgs.callPackage (pkg-dir + "/next") { };
@@ -56,6 +57,17 @@ in rec {
     };
 
     # gpg.enable = true;
+
+    ssh = {
+      enable = true;
+
+      controlMaster  = "auto";
+      controlPath    = "${tmp-dir}/ssh-%u-%r@%h:%p";
+      controlPersist = "1800";
+
+      forwardAgent = true;
+      serverAliveInterval = 60;
+    };
   };
 
   xdg = {
