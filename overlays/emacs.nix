@@ -35,6 +35,7 @@ in {
       polymode
       poly-markdown
       poly-R
+      projectile
       rainbow-delimiters
       slime
       spacemacs-theme
