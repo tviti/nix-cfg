@@ -107,7 +107,13 @@ in stdenv.mkDerivation rec {
     rm -rf ./Next.app
     ln -s $out/Applications/Next.app/Contents/MacOS/next $out/bin/next
   '' else ''
-    install -D -m0755 next $out/bin/next
+    mkdir -p $out/bin
+    cp next $out/bin/.next-wrapped
+    echo "
+#!/bin/sh
+${next-pyqt}/next-pyqt-webengine/next-pyqt-webengine.py
+.next-wrapped" > $out/bin/next
+    chmod 0755 $out/bin/next
 
     substituteInPlace assets/next.desktop \
       --replace "VERSION" "${version}"
