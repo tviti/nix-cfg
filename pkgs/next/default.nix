@@ -1,14 +1,15 @@
 /* A derivation for building Next browser with the PyQtWebEngine frontend,
-   cloning from my own fork of the next repo (i.e. this is not using the
-   official next source). This was originally written to install on a Darwin
-   system. Linux specific bits were largely taken from the nixpkgs derivation.
+      cloning from my own fork of the next repo (i.e. this is not using the
+      official next source). This was originally written to install on a Darwin
+      system. Linux specific bits were largely taken from the nixpkgs derivation.
 
-   Since the nixpkgs libfixposix derivation does not support Darwin, I have
-   packaged it myself for use on macOS machines (with the .nix file based on the
-   brew recipe).
+      Since the nixpkgs libfixposix derivation does not support Darwin, I have
+      packaged it myself for use on macOS machines (with the .nix file based on the
+      brew recipe).
 
-   Note that the macOS derivation is very "dirty" my nix-an standards, as it
-pulls in dependencies using pip and quicklisp directly.  */
+      Note that the macOS derivation is very "dirty" my nix-an standards, as it
+   pulls in dependencies using pip and quicklisp directly.
+*/
 
 { stdenv, xclip, pass, fetchFromGitHub, sbcl, callPackage, lispPackages, curl
 , cacert, libsForQt5, libfixposix }:
@@ -32,9 +33,10 @@ in stdenv.mkDerivation rec {
   # Stripping destroys the generated SBCL image
   dontStrip = true;
 
-  nativeBuildInputs = if stdenv.isDarwin then
-    [ sbcl libfixposix ]
-  else
+  nativeBuildInputs = if stdenv.isDarwin then [
+    sbcl
+    libfixposix
+  ] else
     [ sbcl ] ++ (with lispPackages; [ prove-asdf trivial-features ]);
 
   buildInputs = if stdenv.isDarwin then [
@@ -107,20 +109,20 @@ in stdenv.mkDerivation rec {
     rm -rf ./Next.app
     ln -s $out/Applications/Next.app/Contents/MacOS/next $out/bin/next
   '' else ''
-    mkdir -p $out/bin
-    cp next $out/bin/.next-wrapped
-    echo "
-#!/bin/sh
-${next-pyqt}/next-pyqt-webengine/next-pyqt-webengine.py
-.next-wrapped" > $out/bin/next
-    chmod 0755 $out/bin/next
+        mkdir -p $out/bin
+        cp next $out/bin/.next-wrapped
+        echo "
+    #!/bin/sh
+    ${next-pyqt}/next-pyqt-webengine/next-pyqt-webengine.py
+    .next-wrapped" > $out/bin/next
+        chmod 0755 $out/bin/next
 
-    substituteInPlace assets/next.desktop \
-      --replace "VERSION" "${version}"
+        substituteInPlace assets/next.desktop \
+          --replace "VERSION" "${version}"
 
-    mkdir -p $out/share/applications
-    cp assets/next.desktop $out/share/applications/next.desktop
-  '';
+        mkdir -p $out/share/applications
+        cp assets/next.desktop $out/share/applications/next.desktop
+      '';
 
   meta = with stdenv; { platforms = [ "x86_64-linux" "x86_64-darwin" ]; };
 }
