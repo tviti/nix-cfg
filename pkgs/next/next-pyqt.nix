@@ -16,9 +16,6 @@ in stdenv.mkDerivation rec {
 
   buildInputs = [
     qtbase
-  ];
-
-  propagatedBuildInputs = [ 
     next-python
   ];
   
