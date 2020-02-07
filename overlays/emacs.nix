@@ -29,6 +29,7 @@ in {
       magit
       magit-annex
       matlab-mode
+      htmlize
       org
       org-bullets
       pdf-tools
