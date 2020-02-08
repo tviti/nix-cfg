@@ -19,4 +19,6 @@ in rec {
     # Load a theme
     include ${kitty-themes}/share/kitty-themes/gruvbox_light.conf
   '';
+
+  services.syncthing.enable = true;
 }
