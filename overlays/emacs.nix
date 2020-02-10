@@ -35,6 +35,7 @@ in {
       pdf-tools
       polymode
       poly-markdown
+      poly-org
       poly-R
       projectile
       rainbow-delimiters
