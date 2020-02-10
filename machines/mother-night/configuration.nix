@@ -108,6 +108,14 @@ in {
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
 
+  # Disable touchscreen, since it can be wonky from time to time. You can turn
+  # it back on with $ xinput enable 14
+  services.xserver.inputClassSections = [ ''
+    Identifier "Touchscreen catchall"
+    MatchIsTouchscreen "on"
+    option "Ignore" "on"
+  '' ];
+  
   services.xserver = {
     enable = true;
 
