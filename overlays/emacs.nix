@@ -20,7 +20,7 @@ in {
       evil-magit
       evil-org
       elfeed
-      elpy
+      # elpy
       eyebrowse
       flymake
       highlight-numbers
@@ -35,7 +35,7 @@ in {
       pdf-tools
       polymode
       poly-markdown
-      poly-org
+      # poly-org
       poly-R
       projectile
       rainbow-delimiters
@@ -44,5 +44,6 @@ in {
       spaceline
       stan-mode
       which-key
+      yasnippet
     ]);
 }
