@@ -19,6 +19,7 @@ in rec {
         direnv
         gitFull
         gitAndTools.git-annex
+        gitAndTools.git-annex-remote-rclone
         globus-cli
         myEmacs
         myR
