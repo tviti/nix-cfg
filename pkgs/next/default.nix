@@ -21,13 +21,13 @@ let
     libsForQt5.callPackage ./next-pyqt.nix { };
 in stdenv.mkDerivation rec {
   name = "next";
-  version = "v1.3.4";
+  version = "v1.5.0";
 
   src = fetchFromGitHub {
     owner = "tviti";
     repo = "next";
-    rev = "57cb6b3ebb185d5eda0df7f53303d50c83ccd1db";
-    sha256 = "1c1kl3ddp33ydzrq27ihfwg3xaiaqlxz9s6rcnwdwkb918igrx9z";
+    rev = "b0e8398c495a6a6b5d28bfe5fae68ace5b4c2f0f";
+    sha256 = "1h4fgqyh061i2p6nkfdzz6b8mhdvy99khy9drjw6r3rk289dpxj9";
   };
 
   # Stripping destroys the generated SBCL image
