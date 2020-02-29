@@ -26,6 +26,7 @@ in {
       highlight-numbers
       nix-mode
       direnv
+      vterm
       magit
       magit-annex
       matlab-mode
