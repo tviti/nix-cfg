@@ -19,7 +19,7 @@ in rec {
     bash = {
       enable = true;
       profileExtra = ''
-        export PATH=$PATH:/Applications/MATLAB_R2016a.app/bin/
+        export PATH=$PATH:/Applications/MATLAB_R2019b.app/bin/
         source ${home_directory}/.nix-profile/etc/profile.d/nix.sh
 
         # added by Anaconda2 5.0.0 installer
