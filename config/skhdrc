@@ -1,5 +1,5 @@
 # open Eshell terminal
-shift + cmd - space : ~/.nix-profile/bin/emacsclient -e "(tviti/poplight-make-frame)"
+shift + cmd - space : ~/.nix-profile/bin/emacsclient -e "(poplight-make-frame)"
 
 # focus window
 lalt - h : yabai -m window --focus west
