@@ -4,14 +4,15 @@ let
   nix-dir = "/home/tviti/.config/nixpkgs";
   pkg-dir = nix-dir + "/pkgs";
   kitty-themes = pkgs.callPackage (pkg-dir + "/kitty-themes") { };
-  matlab = pkgs.callPackage (pkg-dir + "/matlab") { };
+  matlabAndTools = pkgs.callPackage (pkg-dir + "/matlab/default.nix") { };
 in rec {
   imports = [
     (nix-dir + "/home-common.nix")
   ];
 
   home.packages = [
-    matlab
+    matlabAndTools.matlab
+    matlabAndTools.mlint
     kitty-themes
     pkgs.spotify
   ];
