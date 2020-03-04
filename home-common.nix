@@ -80,6 +80,7 @@ in rec {
 
     configFile."next".source = config-dir + "/next-cfg";
     configFile."i3".source = config-dir + "/i3";
+    configFile."i3status".source = config-dir + "/i3status";
 
     configFile."aspell/config".text = ''
       dict-dir ${home-dir}/.nix-profile/lib/aspell
