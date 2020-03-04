@@ -1,34 +1,11 @@
 #+title: MATLAB on nixos
 
-To install MATLAB on nixos, we initialize a =FHSUserEnv= using =default.nix=,
-and then perform an /impure/ installation using the MATLAB installer. This is
-done by changing the line:
-
-#+begin_example
-runScript = "${runPath}/bin/matlab";
-#+end_example
-
-in =default.nix=, to
-  
-#+begin_example
-runScript = "bash";
-#+end_example
-
-Then, to run the graphical installer, first drop into the build environment with
-
-#+begin_example
-$ nix-shell
-$ matlab
-#+end_example
-
-then run the install script and follow the instructions. Specify =$HOME/MATLAB=
-when prompted for the destination folder. Although this will pollute your home
-dir, it avoids having to invoke =sudo= (which will thrown an error when called
-from the build env). After the installation has completed, change the lines in
-=default.nix= back, and rebuild the nixos env.
-
-* Caveats
-Launching the matlab "desktop" (i.e. the gui) will fail with a segfault.
+You can perform an /impure/ MATLAB installation using the FHS env provided by
+=shell.nix=. Drop into the shell by calling ~$ nix-shell~, and then into the FHS
+environment by calling ~$ matlab-shell~. Then, run the MATLAB installer, and
+follow the instructions. When prompted for an install location, select a
+user-writable directory, and then edit ~version~ and ~runPath~ in =common.nix=
+to reflect your choice (the default is =$HOME/MATLAB/R2019b=.
 
 * Resources
-=default.nix= is based on the MATLAB package in [[https://github.com/markuskowa/NixOS-QChem][NixOS-QChem]].
+  - https://github.com/jorsn/matlab-nix-imperative

@@ -1,6 +1,11 @@
 let
   pkgs = import <nixpkgs> { };
-  matlab = pkgs.callPackage ./default.nix { };
+  common = import ./common.nix { };
+  matlab-shell = pkgs.buildFHSUserEnv {
+    name = "matlab-shell";
+    inherit (common) targetPkgs;
+    runScript = "bash";
+  };
 in pkgs.mkShell {
-  buildInputs = [ matlab ];
+  buildInputs = [ matlab-shell ];
 }
