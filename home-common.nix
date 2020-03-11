@@ -42,7 +42,6 @@ in rec {
       ] ++ myMappingTools;
 
     sessionVariables = {
-      ASPELL_CONF = "conf ${xdg.configHome}/aspell/config;";
       ALTERNATE_EDITOR = "${pkgs.vim}/bin/vi";
       EDITOR = "${pkgs.myEmacs}/bin/emacsclient";
     };
@@ -74,6 +73,17 @@ in rec {
     };
   };
 
+  home.file."/.aspell.conf".text = ''
+      dict-dir ${home-dir}/.nix-profile/lib/aspell
+      home-dir ${home-dir}/Sync
+      personal ${home-dir}/Sync/.aspell.en.pws
+  
+      master en_US
+      extra-dicts en_US-science.rws
+      add-extra-dicts en-computers.rws
+  '';
+
+
   xdg = {
     enable = true;
 
@@ -85,16 +95,6 @@ in rec {
     configFile."i3status".source = config-dir + "/i3status";
     configFile."direnv/direnvrc".text = ''
       source ${nix-direnv}/share/nix-direnv/direnvrc
-    '';
-
-    configFile."aspell/config".text = ''
-      dict-dir ${home-dir}/.nix-profile/lib/aspell
-      home-dir ${home-dir}/Sync
-      personal ${home-dir}/Sync/.aspell.en.pws
-
-      master en_US
-      extra-dicts en_US-science.rws
-      add-extra-dicts en-computers.rws
     '';
 
     # configFile."kitty/kitty.conf".text = ''
