@@ -14,8 +14,10 @@ in rec {
     matlabAndTools.matlab
     matlabAndTools.mlint
     kitty-themes
-    pkgs.spotify
-  ];
+  ] ++ (with pkgs; [
+    skypeforlinux
+    spotify
+  ]);
 
   xdg.configFile."kitty/kitty.conf".text = ''
     # Load a theme
