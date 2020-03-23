@@ -25,16 +25,19 @@ in {
       # elpy
       eyebrowse
       flymake
+      flyspell-correct-ivy
       highlight-numbers
       nix-mode
       direnv
       vterm
+      ledger-mode
       magit
       magit-annex
       matlab-mode
       htmlize
       org
       org-bullets
+      org-ql
       pdf-tools
       polymode
       poly-markdown
