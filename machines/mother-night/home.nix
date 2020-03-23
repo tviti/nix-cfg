@@ -33,4 +33,9 @@ in rec {
   programs.mbsync.enable = true;
   programs.msmtp.enable = true;
   accounts.email.accounts = import ./private/email.nix;
+
+  #
+  # Gnupg cfg
+  #
+  home.file."/.gnupg/gpg.conf".source = ./private/gpg.conf;
 }
