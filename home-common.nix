@@ -22,8 +22,9 @@ in rec {
         gitAndTools.git-annex
         gitAndTools.git-annex-remote-rclone
         globus-cli
+        ledger
         myEmacs
-        myR
+        # myR
         next
         nix-direnv
         nixfmt # for emacs nix-mode
