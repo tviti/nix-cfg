@@ -17,6 +17,7 @@ in rec {
   ] ++ (with pkgs; [
     skypeforlinux
     spotify
+    mu
   ]);
 
   xdg.configFile."kitty/kitty.conf".text = ''
@@ -25,4 +26,11 @@ in rec {
   '';
 
   services.syncthing.enable = true;
+
+  #
+  # Email cfg
+  #
+  programs.mbsync.enable = true;
+  programs.msmtp.enable = true;
+  accounts.email.accounts = import ./private/email.nix;
 }
