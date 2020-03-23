@@ -60,6 +60,7 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    borgbackup
     displaylink
     firefox
     hfsprogs
@@ -144,6 +145,10 @@ in {
 
     # Enable insignia USB2HDMI dongle
     videoDrivers = [ "displaylink" ];
+  };
+
+  services.borgbackup.jobs = {
+    inherit (import ./private/borgbackup.nix) homeBackup;
   };
 
   services.logind = {
