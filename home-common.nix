@@ -60,8 +60,6 @@ in rec {
       package = pkgs.gitFull;
     };
 
-    # gpg.enable = true;
-
     ssh = {
       enable = true;
 
@@ -105,7 +103,7 @@ in rec {
   };
 
   home.file.".chktexrc".source = config-dir + "/chktexrc";
-
+  
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
