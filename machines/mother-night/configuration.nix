@@ -157,6 +157,9 @@ in {
       IdleActionSec=900
     '';
   };
+
+  # Yubikey packages and settings
+  services.udev.packages = [ pkgs.yubikey-personalization ];
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tviti = {
