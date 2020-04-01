@@ -30,9 +30,11 @@ in rec {
   #
   # Email cfg
   #
-  programs.mbsync.enable = true;
+  accounts.email.accounts = import ./private/email.nix { inherit pkgs; };
+
   programs.msmtp.enable = true;
-  accounts.email.accounts = import ./private/email.nix;
+  programs.mbsync.enable = true;
+  services.mbsync.enable = true;  # Turn on auto-syncing service
 
   #
   # Gnupg cfg
