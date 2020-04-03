@@ -35,6 +35,9 @@ in rec {
   programs.msmtp.enable = true;
   programs.mbsync.enable = true;
   services.mbsync.enable = true;  # Turn on auto-syncing service
+  services.mbsync.postExec = ''
+    ${pkgs.myEmacs}/bin/emacsclient -e "(mu4e-update-index)"
+  '';
 
   #
   # Gnupg cfg
