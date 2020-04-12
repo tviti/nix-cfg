@@ -35,6 +35,7 @@ in rec {
         subversion
         haskellPackages.pandoc-citeproc
         #pass
+        unzip
         wget
         vim
         texlab # LSP server for latex
