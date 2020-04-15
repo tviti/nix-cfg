@@ -158,6 +158,7 @@ in {
   };
 
   # Yubikey packages and settings
+  services.pcscd.enable = true;
   services.udev.packages = [ pkgs.yubikey-personalization ];
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
