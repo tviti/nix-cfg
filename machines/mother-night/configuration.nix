@@ -65,6 +65,7 @@ in {
     firefox
     hfsprogs
     kitty
+    man-db
     pigz # Parallel version of gzip
     pinentry-qt
     xclip
