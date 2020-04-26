@@ -21,7 +21,6 @@ in rec {
         gitFull
         gitAndTools.git-annex
         gitAndTools.git-annex-remote-rclone
-        globus-cli
         ledger
         myEmacs
         # myR
