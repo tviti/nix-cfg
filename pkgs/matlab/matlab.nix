@@ -5,6 +5,7 @@ let
     writeScriptBin "matlab" ''
       #!/bin/sh
       export MATLAB_JAVA=/usr/lib/openjdk/jre
+      export MESA_LOADER_DRIVER_OVERRIDE=i965
       exec ${runPath}/bin/matlab "$@"
     '';
 in buildFHSUserEnv {
