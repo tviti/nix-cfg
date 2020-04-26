@@ -5,6 +5,7 @@ let
   pkg-dir = nix-dir + "/pkgs";
   kitty-themes = pkgs.callPackage (pkg-dir + "/kitty-themes") { };
   matlabAndTools = pkgs.callPackage (pkg-dir + "/matlab/default.nix") { };
+  plotdigitizer = pkgs.callPackage (pkg-dir + "/plotdigitizer/default.nix") { };
 in rec {
   imports = [
     (nix-dir + "/home-common.nix")
@@ -13,6 +14,7 @@ in rec {
   home.packages = [
     matlabAndTools.matlab
     matlabAndTools.mlint
+    plotdigitizer
     kitty-themes
   ] ++ (with pkgs; [
     skypeforlinux
