@@ -92,7 +92,8 @@ in {
   # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [ epson-escpr ];
 
   # Enable sound.
   sound.enable = true;
