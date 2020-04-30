@@ -195,3 +195,6 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# Float MATLAB figures by default.
+for_window [Class="MATLAB" title="Figure*"] floating enable
