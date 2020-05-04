@@ -124,12 +124,14 @@ in {
       extraPackages = with pkgs; [ dmenu i3status i3lock ];
       extraSessionCommands = ''
         # Multiple monitor configuration.
-        xrandr --output DVI-I-1-1 --auto --right-of DP-1 # SAMSUNG
+        xrandr --output DVI-I-1-1 --auto --right-of DP-3 # SAMSUNG
       '';
     };
 
-    # Enable insignia USB2HDMI dongle
-    videoDrivers = [ "displaylink" ];
+    videoDrivers = [
+      "nvidia"
+      "displaylink" # Insignia USB2HDMI dongle
+    ];
   };
 
   # services.borgbackup.jobs = {
