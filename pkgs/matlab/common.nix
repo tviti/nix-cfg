@@ -1,40 +1,65 @@
-{}:
+/* This list of dependencies is based on the official Mathworks dockerfile for
+   R2020a, available at
+     https://github.com/mathworks-ref-arch/container-images
+*/
+
+{ }:
 
 rec {
-  version = "2019b";
-  runPath = "$HOME/MATLAB/R${version}";
-  targetPkgs = pkgs: with pkgs; [
-    atk
-    cairo
-    git
-    glib
-    gdk-pixbuf
-    libGL
-    mesa_glu
-    freetype
-    jre
-    ncurses5
-    pam
-    pango
-    zlib
-    zsh
-  ]
-  ++
-  (with xorg; [
-    libXcursor
-    libXcomposite
-    libX11
-    libXft
-    libXext
-    libXi
-    libXmu
-    libXp
-    libXpm
-    libXrandr
-    libXrender
-    libXt
-    libXtst
-    libXxf86vm
-    libxcb
-  ]);
+  runPath = "$HOME/MATLAB/R2020a";
+  targetPkgs = pkgs:
+    with pkgs;
+    [
+      cacert
+      alsaLib # libasound2
+      atk
+      glib
+      glibc
+      cairo
+      cups
+      dbus
+      fontconfig
+      gdk-pixbuf
+      gst-plugins-base
+      gstreamer
+      gtk3
+      nspr
+      nss
+      pam
+      pango
+      python27
+      python36
+      python37
+      libselinux
+      libsndfile
+      glibcLocales
+      procps
+      unzip
+      zlib
+
+      gcc
+      gfortran
+
+      # nixos specific
+      udev
+      jre
+      ncurses # Needed for CLI
+    ] ++ (with xorg; [
+      libSM
+      libX11
+      libxcb
+      libXcomposite
+      libXcursor
+      libXdamage
+      libXext
+      libXfixes
+      libXft
+      libXi
+      libXinerama
+      libXrandr
+      libXrender
+      libXt
+      libXtst
+      libXxf86vm
+    ]);
 }
