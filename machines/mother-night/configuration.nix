@@ -123,6 +123,7 @@ in {
     enable = true;
 
     layout = "us";
+    xkbOptions = "ctrl:swapcaps"; # Swap ctrl/capslock keys
 
     # Enable touchpad support.
     libinput.enable = true;
