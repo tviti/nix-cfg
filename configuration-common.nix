@@ -25,6 +25,7 @@ in {
       gnupg
       lsof
       pass
+      pavucontrol
       pigz
       python3
       synergy
