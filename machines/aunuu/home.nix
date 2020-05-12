@@ -68,10 +68,10 @@ in rec {
   programs.msmtp.enable = true;
   programs.mbsync.enable = true;
   services.imapnotify.enable = true; # Turn on IMAP IDLE (i.e. push)
-  # services.mbsync.enable = true;  # Turn on auto-syncing service
-  # services.mbsync.postExec = ''
-  #   ${pkgs.myEmacs}/bin/emacsclient -e "(mu4e-update-index)"
-  # '';
+  services.mbsync.enable = true;  # Turn on auto-syncing service
+  services.mbsync.postExec = ''
+    ${pkgs.myEmacs}/bin/emacsclient -e "(mu4e-update-index)"
+  '';
 
   #
   # Gnupg cfg
