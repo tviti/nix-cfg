@@ -25,6 +25,7 @@ in rec {
     spotify
     mu
     ncview
+    netcdf # for ncdump utility
   ]);
 
   xdg.configFile."kitty/kitty.conf".text = ''
