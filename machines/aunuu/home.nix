@@ -6,12 +6,16 @@ let
   kitty-themes = pkgs.callPackage (pkg-dir + "/kitty-themes") { };
   matlabAndTools = pkgs.callPackage (pkg-dir + "/matlab/default.nix") { };
   plotdigitizer = pkgs.callPackage (pkg-dir + "/plotdigitizer/default.nix") { };
+  idv = pkgs.callPackage (pkg-dir + "/idv/default.nix") {
+    jogl = pkgs.javaPackages.jogl_2_3_2;
+  };
 in rec {
   imports = [
     (nix-dir + "/home-common.nix")
   ];
 
   home.packages = [
+    idv
     matlabAndTools.matlab
     matlabAndTools.mlint
     plotdigitizer
