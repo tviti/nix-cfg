@@ -13,6 +13,7 @@ in {
     with epkgs; [
       auctex
       bash-completion
+      bbcode-mode
       company
       counsel
       eglot
