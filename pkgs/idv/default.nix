@@ -17,10 +17,6 @@ in stdenv.mkDerivation rec {
 
   phases = [ "unpackPhase" "installPhase" ];
 
-  unpackPhase = ''
-    unzip $src
-  '';
-
   installPhase = ''
     mkdir -p $out/share/idv
     mkdir -p $out/bin
