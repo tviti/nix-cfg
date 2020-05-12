@@ -9,6 +9,15 @@ let
   idv = pkgs.callPackage (pkg-dir + "/idv/default.nix") {
     jogl = pkgs.javaPackages.jogl_2_3_2;
   };
+
+  zoom-i3wm = pkgs.writeScriptBin "zoom-i3wm" ''
+    #!${pkgs.bash}/bin/bash
+    ${pkgs.xcompmgr}/bin/xcompmgr -c -l0 -t0 -r0 -o.00 &
+    export XCOMPMGR_PID=$!
+    exec ${pkgs.zoom-us}/share/zoom-us/ZoomLauncher "$@"
+    kill $XCOMPMGR_PID
+  '';
+
 in rec {
   imports = [
     (nix-dir + "/home-common.nix")
@@ -26,6 +35,7 @@ in rec {
     mu
     ncview
     netcdf # for ncdump utility
+    zoom-i3wm
   ]);
 
   xdg.configFile."kitty/kitty.conf".text = ''
