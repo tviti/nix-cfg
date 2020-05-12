@@ -6,7 +6,7 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "nix-community";
     repo = "nix-direnv";
-    rev = "81d3f5083ae68aec5d9f6fc9eebac57c82a9d280";
+    rev = "f8da3dcb49c1459de8bb300cac10f06a5add5d9b";
     sha256 = "067493hbsij59bvaqi38iybacqbzwx876dvdm651b5mn3zs3h42c";
   };
 
