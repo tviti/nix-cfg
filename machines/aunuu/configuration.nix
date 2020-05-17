@@ -124,6 +124,7 @@ in {
       extraSessionCommands = ''
         # Multiple monitor configuration.
         xrandr --output DVI-I-1-1 --auto --right-of DP-3 # SAMSUNG
+        xrandr --output DP-1 --auto --left-of DP-3 --rotate left # Dell U2412M
       '';
     };
 
