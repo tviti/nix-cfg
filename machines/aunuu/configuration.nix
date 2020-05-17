@@ -33,12 +33,14 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = hostname; # Define your hostname.
+  networking.wireless.enable = true;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
+  networking.interfaces.wlp0s20f0u3.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
