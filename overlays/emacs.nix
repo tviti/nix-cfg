@@ -24,7 +24,7 @@ in {
       evil-org
       elfeed
       # elpy
-      eyebrowse
+      # eyebrowse
       flymake
       flyspell-correct-ivy
       highlight-numbers
