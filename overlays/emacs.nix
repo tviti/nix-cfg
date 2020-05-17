@@ -39,6 +39,7 @@ in {
       org
       org-bullets
       org-ql
+      ox-gfm
       pdf-tools
       polymode
       poly-markdown
