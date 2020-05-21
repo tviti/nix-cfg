@@ -24,7 +24,7 @@ in rec {
   ];
 
   home.packages = [
-    idv
+    # idv
     matlabAndTools.matlab
     matlabAndTools.mlint
     plotdigitizer
