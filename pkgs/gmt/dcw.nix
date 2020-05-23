@@ -15,10 +15,7 @@ stdenv.mkDerivation rec {
 
   meta = with stdenv; {
     homepage = "https://www.soest.hawaii.edu/pwessel/dcw/";
-    description = ''
-      DCW-GMT is an enhancement to the original 1:1,000,000 scale vector basemap
-      of the world.
-    '';
+    description = "Vector basemap of the world, for use with GMT.";
     longDescription = ''
       DCW-GMT is an enhancement to the original 1:1,000,000 scale vector basemap
       of the world, available from the Princeton University Digital Map and
@@ -26,8 +23,10 @@ stdenv.mkDerivation rec {
       largest 8 countries are now represented) than the original data
       source. Information about DCW can be found on Wikipedia
       (https://en.wikipedia.org/wiki/Digital_Chart_of_the_World). This data is
-      for use by GMT, the Generic Mapping Tools.  '';
+      for use by GMT, the Generic Mapping Tools.
+    '';
     license = lib.licenses.lgpl3Plus;
+    # maintainerse = with maintainers; [ tviti ];
   };
 
 }

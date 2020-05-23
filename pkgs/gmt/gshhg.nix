@@ -15,9 +15,7 @@ stdenv.mkDerivation rec {
 
   meta = with stdenv; {
     homepage = "https://www.soest.hawaii.edu/pwessel/gshhg/";
-    description = ''
-      Global Self-consistent Hierarchical High-resolution Geography (GSHHG)
-    '';
+    description = "High-resolution shoreline data set, for use with GMT.";
     longDescription = ''
       GSHHG is a high-resolution shoreline data set amalgamated from two
       databases: Global Self-consistent Hierarchical High-resolution Shorelines
@@ -27,5 +25,6 @@ stdenv.mkDerivation rec {
       Mapping Tools.
     '';
     license = lib.licenses.lgpl3Plus;
+    # maintainers = with maintainers; [ tviti ];
   };
 }
