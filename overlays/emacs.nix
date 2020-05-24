@@ -3,7 +3,7 @@
 self: super:
 let
   # Use emacs-macport on Darwin systems
-  package = (if super.stdenv.isDarwin then super.emacsMacport else super.emacs).override {
+  package = if super.stdenv.isDarwin then super.emacsMacport else super.emacs.override {
     imagemagick = super.imagemagickBig;
   };
   customEmacsPackages =
