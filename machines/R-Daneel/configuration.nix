@@ -36,7 +36,7 @@ in {
   environment.systemPackages = with pkgs; [
     skhd
     yabai
-    xquartz # NOTE: You should run $ xquartz-install after installation
+    #xquartz # NOTE: You should run $ xquartz-install after installation
     synergy
   ];
 
