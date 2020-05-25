@@ -32,6 +32,7 @@ in {
       direnv
       vterm
       ledger-mode
+      lispy
       magit
       magit-annex
       matlab-mode
