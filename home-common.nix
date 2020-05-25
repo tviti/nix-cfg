@@ -29,6 +29,7 @@ in rec {
         nixfmt # for emacs nix-mode
         nodePackages.bash-language-server
         pandoc
+        pass
         pv
         rclone
         subversion

@@ -24,7 +24,6 @@ in {
       gitFull
       gnupg
       lsof
-      pass
       pavucontrol
       pigz
       python3
