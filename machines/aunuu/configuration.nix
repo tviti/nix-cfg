@@ -136,9 +136,9 @@ in {
     ];
   };
 
-  # services.borgbackup.jobs = {
-  #   inherit (import ./private/borgbackup.nix) homeBackup;
-  # };
+  services.borgbackup.jobs = {
+    inherit (import ./private/borgbackup.nix) homeBackup dataBackup;
+  };
 
   services.logind = {
     extraConfig = ''
