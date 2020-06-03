@@ -116,6 +116,7 @@ in {
 
     # Enable touchpad support.
     libinput.enable = true;
+    libinput.naturalScrolling = true;
 
     # Enable i3wm
     displayManager.defaultSession = "none+i3";
