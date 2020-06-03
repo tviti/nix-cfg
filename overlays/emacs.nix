@@ -39,6 +39,7 @@ in {
       htmlize
       org
       org-bullets
+      org-pdftools
       org-ql
       ox-gfm
       pdf-tools
