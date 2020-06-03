@@ -150,21 +150,21 @@ workspace $ws2 output DP-1
 workspace $ws3 output DP-1
 workspace $ws4 output DP-3
 workspace $ws5 output DP-3
-workspace $ws6 output DVI-I-1-1
-workspace $ws7 output DVI-I-1-1
-workspace $ws8 output DVI-I-1-1
-workspace $ws9 output DVI-I-1-1
-workspace $ws0 output DVI-I-1-1
+workspace $ws6 output DP-3
+workspace $ws7 output DP-7
+workspace $ws8 output DP-7
+workspace $ws9 output DP-7
+workspace $ws0 output DP-7
 
 # jump between monitors
 bindsym $mod+Ctrl+1 focus output DP-1
 bindsym $mod+Ctrl+2 focus output DP-3
-bindsym $mod+Ctrl+3 focus output DVI-I-1-1
+bindsym $mod+Ctrl+3 focus output DP-7
 
 # "throw" focused container between monitors
 bindsym $mod+Ctrl+Shift+1 move container to output DP-1
 bindsym $mod+Ctrl+Shift+2 move container to output DP-3
-bindsym $mod+Ctrl+Shift+3 move container to output DVI-I-1-1
+bindsym $mod+Ctrl+Shift+3 move container to output DP-7
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
