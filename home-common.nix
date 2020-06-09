@@ -6,7 +6,6 @@ let
   pkg-dir = ./pkgs;
   config-dir = ./config;
   next = pkgs.callPackage (pkg-dir + "/next") { };
-  nix-direnv = pkgs.callPackage (pkg-dir + "/nix-direnv/default.nix") { };
 in rec {
   home = {
     packages = with pkgs;
@@ -84,7 +83,6 @@ in rec {
       add-extra-dicts en-computers.rws
   '';
 
-
   xdg = {
     enable = true;
 
@@ -94,9 +92,6 @@ in rec {
     configFile."next".source = config-dir + "/next-cfg";
     configFile."i3".source = config-dir + "/i3";
     configFile."i3status".source = config-dir + "/i3status";
-    configFile."direnv/direnvrc".text = ''
-      source ${nix-direnv}/share/nix-direnv/direnvrc
-    '';
 
     # configFile."kitty/kitty.conf".text = ''
     #   # Load a theme
@@ -108,4 +103,7 @@ in rec {
   
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.direnv.enable = true;
+  programs.direnv.enableNixDirenvIntegration = true;
 }
