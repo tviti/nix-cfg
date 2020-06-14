@@ -26,6 +26,11 @@ in {
       "home-manager=${nix-dir}/nix-src/home-manager"
       "nixos-config=${machine-dir}/configuration.nix"
     ];
+
+    extraOptions = ''
+      keep-derivations = true
+      keep-outputs = true
+    '';
   };
 
   # Use the systemd-boot EFI boot loader.
