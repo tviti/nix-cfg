@@ -40,7 +40,7 @@ in rec {
 
   xdg.configFile."kitty/kitty.conf".text = ''
     # Load a theme
-    include ${kitty-themes}/share/kitty-themes/gruvbox_light.conf
+    include ${kitty-themes}/share/kitty-themes/Afterglow.conf
   '';
 
   home.file."/.ncviewrc".text = ''
