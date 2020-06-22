@@ -90,7 +90,7 @@ in rec {
     # Configuration files
     configHome = "${home-dir}/.config";
 
-    configFile."next".source = config-dir + "/next-cfg";
+    configFile."nyxt".source = config-dir + "/next-cfg";
     configFile."i3".source = config-dir + "/i3";
     configFile."i3status".source = config-dir + "/i3status";
 
