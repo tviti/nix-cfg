@@ -12,10 +12,17 @@ let
 
   zoom-i3wm = pkgs.writeScriptBin "zoom-i3wm" ''
     #!${pkgs.bash}/bin/bash
+
     ${pkgs.xcompmgr}/bin/xcompmgr -c -l0 -t0 -r0 -o.00 &
     export XCOMPMGR_PID=$!
-    exec ${pkgs.zoom-us}/share/zoom-us/ZoomLauncher "$@"
-    kill $XCOMPMGR_PID
+    function finish {
+      echo "Killing xcompmgr..."
+      kill $XCOMPMGR_PID
+    }
+
+    ${pkgs.zoom-us}/share/zoom-us/ZoomLauncher
+
+    trap finish EXIT
   '';
 
 in rec {
