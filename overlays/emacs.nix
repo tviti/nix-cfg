@@ -41,7 +41,6 @@ in {
       org-bullets
       org-pdftools
       org-ql
-      org-ref
       ox-gfm
       pdf-tools
       polymode
