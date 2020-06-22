@@ -34,6 +34,7 @@ in rec {
         subversion
         haskellPackages.pandoc-citeproc
         #pass
+        okular
         unzip
         wget
         vim
