@@ -209,5 +209,5 @@ bar {
         status_command i3status
 }
 
-# Float MATLAB figures by default.
 for_window [Class="MATLAB" title="Figure*"] floating enable
+for_window [Class="zoom"] floating enable
