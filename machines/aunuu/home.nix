@@ -25,6 +25,15 @@ let
     trap finish EXIT
   '';
 
+  nyxt = nyxt-dir: pkgs.writeScriptBin "nyxt" ''
+    #!/bin/sh
+    # Wrapper for an impure build of nyxt. Assumes that a valid shell.nix file
+    # exists in nyxt-dir, and that the nyxt binary has already been built
+    # imperatively.
+
+    nix-shell ${nyxt-dir}/shell.nix --run "${nyxt-dir}/nyxt $@"
+  '';
+
 in rec {
   imports = [
     (nix-dir + "/home-common.nix")
@@ -36,6 +45,7 @@ in rec {
     matlabAndTools.mlint
     plotdigitizer
     kitty-themes
+    (nyxt "$HOME/Source/next")
   ] ++ (with pkgs; [
     skypeforlinux
     spotify
