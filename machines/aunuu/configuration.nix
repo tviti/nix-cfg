@@ -123,16 +123,29 @@ in {
     libinput.enable = true;
     libinput.naturalScrolling = true;
 
+    # Initial multi-monitor config. Ensures rotations occur before login prompt is displayed.
+    xrandrHeads = [
+      { output = "DP-1"; monitorConfig = ''Option "Rotate" "left"''; }
+      { output = "DP-3"; primary = true; } # Set primary to get scaling right
+      { output = "DP-7"; }
+    ];
+
+    displayManager.sessionCommands =
+      let wallpaper = import ./private/wallpaper.nix { inherit pkgs; };
+      in ''
+        # The xrandrHeads attr won't properly set the arrangement, so we force it here.
+        xrandr --output DP-1 --auto --pos 0x0 --rotate left 
+        xrandr --output DP-3 --auto --pos 1200x500 --primary 
+        xrandr --output DP-7 --auto --pos 3120x540
+        
+        ${wallpaper.set}/bin/set-wallpaper.sh
+      '';
+
     # Enable i3wm
     displayManager.defaultSession = "none+i3";
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [ dmenu i3status i3lock ];
-      extraSessionCommands = ''
-        # Multiple monitor configuration.
-        xrandr --output DP-1 --auto --left-of DP-3 --rotate left # Dell U2412M
-        xrandr --output DP-7 --auto --right-of DP-3 # Samsung
-      '';
     };
 
     videoDrivers = [
