@@ -152,6 +152,18 @@ in {
       "nvidia"
       # "displaylink" # Insignia USB2HDMI dongle
     ];
+
+    config = ''
+      Section "InputClass"
+        Identifier "Microsoft Arc Mouse"
+        MatchProduct "Microsoft Arc Mouse"
+        MatchIsPointer "on"
+        Driver "libinput"
+        Option "AccelProfile" "adaptive"
+        Option "NaturalScrolling" "on"
+        Option "MiddleEmulation" "on"
+      EndSection
+    '';
   };
 
   services.borgbackup.jobs = {
