@@ -5,7 +5,7 @@ let
   tmp-dir = "/tmp";
   pkg-dir = ./pkgs;
   config-dir = ./config;
-  next = pkgs.callPackage (pkg-dir + "/next") { };
+  # next = pkgs.callPackage (pkg-dir + "/next") { };
 in rec {
   home = {
     packages = with pkgs;
