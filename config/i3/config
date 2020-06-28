@@ -207,7 +207,15 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+	output DP-3
+}
+
+# Show only the workspace indicators on the other screen's bars
+bar {
+       output DP-1
+       output DP-7
 }
 
 for_window [Class="MATLAB" title="Figure*"] floating enable
 for_window [Class="zoom"] floating enable
+for_window [Class="Ncview"] floating enable

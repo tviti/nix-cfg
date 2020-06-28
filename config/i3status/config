@@ -49,7 +49,7 @@ load {
 }
 
 cpu_usage {
-	format = "cpu: %usage (%cpu0|%cpu1|%cpu2|%cpu3)"
+	format = "cpu: %usage"
 }
 
 cpu_temperature 0 {
