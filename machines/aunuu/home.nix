@@ -58,6 +58,8 @@ in rec {
   xdg.configFile."kitty/kitty.conf".text = ''
     # Load a theme
     include ${kitty-themes}/share/kitty-themes/Afterglow.conf
+
+    font_size 12.0
   '';
 
   home.file."/.ncviewrc".text = ''
