@@ -6,6 +6,8 @@ let
   kitty-themes = pkgs.callPackage (pkg-dir + "/kitty-themes") { };
   matlabAndTools = pkgs.callPackage (pkg-dir + "/matlab/default.nix") { };
   plotdigitizer = pkgs.callPackage (pkg-dir + "/plotdigitizer/default.nix") { };
+  globus-connect-personal = pkgs.callPackage (pkg-dir + "/globus-connect") { };
+  globus-cli = pkgs.callPackage (pkg-dir + "/globus-cli") { };
   idv = pkgs.callPackage (pkg-dir + "/idv/default.nix") {
     jogl = pkgs.javaPackages.jogl_2_3_2;
   };
@@ -45,6 +47,8 @@ in rec {
     matlabAndTools.mlint
     plotdigitizer
     kitty-themes
+    globus-cli
+    globus-connect-personal
     (nyxt "$HOME/Source/next")
   ] ++ (with pkgs; [
     skypeforlinux
