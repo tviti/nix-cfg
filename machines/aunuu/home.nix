@@ -51,6 +51,7 @@ in rec {
     globus-connect-personal
     (nyxt "$HOME/Source/next")
   ] ++ (with pkgs; [
+    qgis
     skypeforlinux
     spotify
     mu
