@@ -5,8 +5,7 @@ let
   tmp-dir = "/tmp";
   pkg-dir = ./pkgs;
   config-dir = ./config;
-  next = pkgs.callPackage (pkg-dir + "/next") { };
-  nix-direnv = pkgs.callPackage (pkg-dir + "/nix-direnv/default.nix") { };
+  # next = pkgs.callPackage (pkg-dir + "/next") { };
 in rec {
   home = {
     packages = with pkgs;
@@ -21,7 +20,6 @@ in rec {
         gitFull
         gitAndTools.git-annex
         gitAndTools.git-annex-remote-rclone
-        globus-cli
         ledger
         myEmacs
         # myR
@@ -30,18 +28,20 @@ in rec {
         nixfmt # for emacs nix-mode
         nodePackages.bash-language-server
         pandoc
+        pass
         pv
         rclone
         subversion
         haskellPackages.pandoc-citeproc
         #pass
+        okular
         unzip
         wget
         vim
         texlab # LSP server for latex
         # lua53Packages.digestif # LSP server for latex
         # kitty-themes
-      ] ++ myMappingTools;
+      ];
 
     sessionVariables = {
       ALTERNATE_EDITOR = "${pkgs.vim}/bin/vi";
@@ -83,19 +83,15 @@ in rec {
       add-extra-dicts en-computers.rws
   '';
 
-
   xdg = {
     enable = true;
 
     # Configuration files
     configHome = "${home-dir}/.config";
 
-    configFile."next".source = config-dir + "/next-cfg";
+    configFile."nyxt".source = config-dir + "/next-cfg";
     configFile."i3".source = config-dir + "/i3";
     configFile."i3status".source = config-dir + "/i3status";
-    configFile."direnv/direnvrc".text = ''
-      source ${nix-direnv}/share/nix-direnv/direnvrc
-    '';
 
     # configFile."kitty/kitty.conf".text = ''
     #   # Load a theme
@@ -107,4 +103,7 @@ in rec {
   
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.direnv.enable = true;
+  programs.direnv.enableNixDirenvIntegration = true;
 }

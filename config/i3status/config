@@ -14,8 +14,8 @@ general {
 order += "volume master"
 order += "wireless _first_"
 order += "ethernet _first_"
-order += "battery all"
 order += "disk /"
+order += "disk /mnt/data"
 order += "load"
 order += "cpu_usage"
 order += "cpu_temperature 0"
@@ -40,12 +40,16 @@ disk "/" {
         format = "%avail"
 }
 
+disk "/mnt/data" {
+        format = "%avail"
+}
+
 load {
         format = "%1min"
 }
 
 cpu_usage {
-	format = "cpu: %usage (%cpu0|%cpu1|%cpu2|%cpu3)"
+	format = "cpu: %usage"
 }
 
 cpu_temperature 0 {

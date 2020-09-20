@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  hostname = "mother-night";
+  hostname = "aunuu";
   nix-dir = "/home/tviti/.config/nixpkgs";
   machine-dir = "${nix-dir}/machines/${hostname}";
 in {
@@ -26,6 +26,11 @@ in {
       "home-manager=${nix-dir}/nix-src/home-manager"
       "nixos-config=${machine-dir}/configuration.nix"
     ];
+
+    extraOptions = ''
+      keep-derivations = true
+      keep-outputs = true
+    '';
   };
 
   # Use the systemd-boot EFI boot loader.
@@ -33,15 +38,14 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = hostname; # Define your hostname.
-  networking.wireless.enable =
-    true; # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp2s0.useDHCP = true;
-  networking.interfaces.wlp3s0.useDHCP = true;
+  networking.interfaces.enp0s31f6.useDHCP = true;
+  networking.interfaces.wlp0s20f0u3.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -61,14 +65,15 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     borgbackup
-    displaylink
     firefox
     hfsprogs
     kitty
     man-db
     pigz # Parallel version of gzip
     pinentry-qt
+    teamviewer
     xclip
+    gmt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -82,6 +87,8 @@ in {
   programs.ssh.startAgent = true;
 
   # List services that you want to enable:
+
+  services.teamviewer.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -111,46 +118,60 @@ in {
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
 
-  # Disable touchscreen, since it can be wonky from time to time. You can turn
-  # it back on with $ xinput enable 14
-  services.xserver.inputClassSections = [ ''
-    Identifier "Touchscreen catchall"
-    MatchIsTouchscreen "on"
-    option "Ignore" "on"
-  '' ];
-  
   services.xserver = {
     enable = true;
 
     layout = "us";
-    xkbOptions = "ctrl:swapcaps"; # Swap ctrl/capslock keys
 
     # Enable touchpad support.
     libinput.enable = true;
     libinput.naturalScrolling = true;
+
+    # Initial multi-monitor config. Ensures rotations occur before login prompt is displayed.
+    xrandrHeads = [
+      { output = "DP-1"; monitorConfig = ''Option "Rotate" "left"''; }
+      { output = "DP-3"; primary = true; } # Set primary to get scaling right
+      { output = "DP-7"; }
+    ];
+
+    displayManager.sessionCommands =
+      let wallpaper = import ./private/wallpaper.nix { inherit pkgs; };
+      in ''
+        # The xrandrHeads attr won't properly set the arrangement, so we force it here.
+        xrandr --output DP-1 --auto --pos 0x0 --rotate left 
+        xrandr --output DP-3 --auto --pos 1200x500 --primary 
+        xrandr --output DP-7 --auto --pos 3120x540
+        
+        ${wallpaper.set}/bin/set-wallpaper.sh
+      '';
 
     # Enable i3wm
     displayManager.defaultSession = "none+i3";
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [ dmenu i3status i3lock ];
-      extraSessionCommands = ''
-        # Multiple monitor configuration. Note that the laptop's builtin screen
-        # will still be enabled (even if the lid is closed). This is because if
-        # we boot with the builtin screen disabled, but there are no external
-        # monitors connected, then we are fucked with no way to re-enable the
-        # builtin screen.
-        xrandr --output HDMI-1 --auto --above eDP-1 # DELL
-        xrandr --output DVI-I-2-1 --auto --right-of HDMI-1 # SAMSUNG
-      '';
     };
 
-    # Enable insignia USB2HDMI dongle
-    videoDrivers = [ "displaylink" ];
+    videoDrivers = [
+      "nvidia"
+      # "displaylink" # Insignia USB2HDMI dongle
+    ];
+
+    config = ''
+      Section "InputClass"
+        Identifier "Microsoft Arc Mouse"
+        MatchProduct "Microsoft Arc Mouse"
+        MatchIsPointer "on"
+        Driver "libinput"
+        Option "AccelProfile" "adaptive"
+        Option "NaturalScrolling" "on"
+        Option "MiddleEmulation" "on"
+      EndSection
+    '';
   };
 
   services.borgbackup.jobs = {
-    inherit (import ./private/borgbackup.nix) homeBackup;
+    inherit (import ./private/borgbackup.nix) homeBackup dataBackup;
   };
 
   services.logind = {
@@ -170,11 +191,14 @@ in {
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "20.09"; # Did you read the comment?
 
 }
+
 

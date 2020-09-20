@@ -3,7 +3,7 @@
 self: super:
 let
   # Use emacs-macport on Darwin systems
-  package = if super.stdenv.isDarwin then super.emacsMacport else super.emacs.override {
+  package = (if super.stdenv.isDarwin then super.emacsMacport else super.emacsGcc).override {
     imagemagick = super.imagemagickBig;
   };
   customEmacsPackages =
@@ -13,6 +13,7 @@ in {
     with epkgs; [
       auctex
       bash-completion
+      bbcode-mode
       company
       counsel
       eglot
@@ -23,21 +24,28 @@ in {
       evil-org
       elfeed
       # elpy
-      eyebrowse
+      # eyebrowse
       flymake
       flyspell-correct-ivy
       highlight-numbers
       nix-mode
+      # org-gcal
+      oauth2 # needed for org-caldav
+      org-caldav
       direnv
       vterm
       ledger-mode
+      lispy
       magit
       magit-annex
       matlab-mode
       htmlize
       org
       org-bullets
+      org-pdftools
       org-ql
+      org-ref
+      ox-gfm
       pdf-tools
       polymode
       poly-markdown

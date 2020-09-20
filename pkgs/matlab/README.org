@@ -5,7 +5,7 @@ You can perform an /impure/ MATLAB installation using the FHS env provided by
 environment by calling ~$ matlab-shell~. Then, run the MATLAB installer, and
 follow the instructions. When prompted for an install location, select a
 user-writable directory, and then edit ~version~ and ~runPath~ in =common.nix=
-to reflect your choice (the default is =$HOME/MATLAB/R2019b=.
+to reflect your choice (the default is =$HOME/MATLAB/R2019b=).
 
 * Resources
   - https://github.com/jorsn/matlab-nix-imperative
