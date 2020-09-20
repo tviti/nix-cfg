@@ -29,6 +29,9 @@ in {
       flyspell-correct-ivy
       highlight-numbers
       nix-mode
+      # org-gcal
+      oauth2 # needed for org-caldav
+      org-caldav
       direnv
       vterm
       ledger-mode
