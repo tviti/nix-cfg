@@ -47,13 +47,14 @@ in rec {
     matlabAndTools.mlint
     plotdigitizer
     kitty-themes
-    globus-cli
+    # globus-cli
     globus-connect-personal
     (nyxt "$HOME/Source/next")
   ] ++ (with pkgs; [
     qgis
     skypeforlinux
     spotify
+    libreoffice
     mu
     ncview
     netcdf # for ncdump utility
