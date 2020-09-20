@@ -20,7 +20,7 @@ rec {
       dbus
       fontconfig
       gdk-pixbuf
-      gst-plugins-base
+      #gst-plugins-base
       gstreamer
       gtk3
       nspr
