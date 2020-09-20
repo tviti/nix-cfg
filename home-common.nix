@@ -41,7 +41,6 @@ in rec {
         texlab # LSP server for latex
         # lua53Packages.digestif # LSP server for latex
         # kitty-themes
-        gmt
       ];
 
     sessionVariables = {
