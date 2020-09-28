@@ -21,7 +21,7 @@ rec {
       fontconfig
       gdk-pixbuf
       #gst-plugins-base
-      gstreamer
+      # gstreamer
       gtk3
       nspr
       nss
