@@ -4,7 +4,7 @@ let
   matlab-wrapped = with common;
     writeScriptBin "matlab" ''
       #!/bin/sh
-      export MATLAB_JAVA=/usr/lib/openjdk/jre
+      export MATLAB_JAVA=/usr/lib/openjdk
       exec ${runPath}/bin/matlab "$@"
     '';
 in buildFHSUserEnv {
