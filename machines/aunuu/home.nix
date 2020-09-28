@@ -45,7 +45,7 @@ in rec {
     # idv
     matlabAndTools.matlab
     matlabAndTools.mlint
-    plotdigitizer
+    # plotdigitizer
     kitty-themes
     # globus-cli
     globus-connect-personal
