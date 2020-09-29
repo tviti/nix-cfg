@@ -61,7 +61,6 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     borgbackup
-    displaylink
     firefox
     hfsprogs
     kitty
@@ -144,9 +143,6 @@ in {
         xrandr --output DVI-I-2-1 --auto --right-of HDMI-1 # SAMSUNG
       '';
     };
-
-    # Enable insignia USB2HDMI dongle
-    videoDrivers = [ "displaylink" ];
   };
 
   services.borgbackup.jobs = {
