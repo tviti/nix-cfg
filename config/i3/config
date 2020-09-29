@@ -161,6 +161,9 @@ bindsym $mod+Ctrl+1 focus output DP-1
 bindsym $mod+Ctrl+2 focus output DP-3
 bindsym $mod+Ctrl+3 focus output DP-7
 
+bindsym $mod+Ctrl+h focus output left
+bindsym $mod+Ctrl+l focus output right
+
 # "throw" focused container between monitors
 bindsym $mod+Ctrl+Shift+1 move container to output DP-1
 bindsym $mod+Ctrl+Shift+2 move container to output DP-3
@@ -204,7 +207,15 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+	output DP-3
 }
 
-# Float MATLAB figures by default.
+# Show only the workspace indicators on the other screen's bars
+bar {
+       output DP-1
+       output DP-7
+}
+
 for_window [Class="MATLAB" title="Figure*"] floating enable
+for_window [Class="zoom"] floating enable
+for_window [Class="Ncview"] floating enable

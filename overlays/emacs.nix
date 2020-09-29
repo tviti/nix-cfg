@@ -3,7 +3,7 @@
 self: super:
 let
   # Use emacs-macport on Darwin systems
-  package = (if super.stdenv.isDarwin then super.emacsMacport else super.emacsUnstable).override {
+  package = (if super.stdenv.isDarwin then super.emacsMacport else super.emacsGcc).override {
     imagemagick = super.imagemagickBig;
   };
   customEmacsPackages =
@@ -29,6 +29,9 @@ in {
       flyspell-correct-ivy
       highlight-numbers
       nix-mode
+      # org-gcal
+      oauth2 # needed for org-caldav
+      org-caldav
       direnv
       vterm
       ledger-mode

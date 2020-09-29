@@ -6,16 +6,34 @@ let
   kitty-themes = pkgs.callPackage (pkg-dir + "/kitty-themes") { };
   matlabAndTools = pkgs.callPackage (pkg-dir + "/matlab/default.nix") { };
   plotdigitizer = pkgs.callPackage (pkg-dir + "/plotdigitizer/default.nix") { };
+  globus-connect-personal = pkgs.callPackage (pkg-dir + "/globus-connect") { };
+  globus-cli = pkgs.callPackage (pkg-dir + "/globus-cli") { };
   idv = pkgs.callPackage (pkg-dir + "/idv/default.nix") {
     jogl = pkgs.javaPackages.jogl_2_3_2;
   };
 
   zoom-i3wm = pkgs.writeScriptBin "zoom-i3wm" ''
     #!${pkgs.bash}/bin/bash
+
     ${pkgs.xcompmgr}/bin/xcompmgr -c -l0 -t0 -r0 -o.00 &
     export XCOMPMGR_PID=$!
-    exec ${pkgs.zoom-us}/share/zoom-us/ZoomLauncher "$@"
-    kill $XCOMPMGR_PID
+    function finish {
+      echo "Killing xcompmgr..."
+      kill $XCOMPMGR_PID
+    }
+
+    ${pkgs.zoom-us}/share/zoom-us/ZoomLauncher
+
+    trap finish EXIT
+  '';
+
+  nyxt = nyxt-dir: pkgs.writeScriptBin "nyxt" ''
+    #!/bin/sh
+    # Wrapper for an impure build of nyxt. Assumes that a valid shell.nix file
+    # exists in nyxt-dir, and that the nyxt binary has already been built
+    # imperatively.
+
+    nix-shell ${nyxt-dir}/shell.nix --run "${nyxt-dir}/nyxt $@"
   '';
 
 in rec {
@@ -27,11 +45,16 @@ in rec {
     # idv
     matlabAndTools.matlab
     matlabAndTools.mlint
-    plotdigitizer
+    # plotdigitizer
     kitty-themes
+    # globus-cli
+    globus-connect-personal
+    (nyxt "$HOME/Source/next")
   ] ++ (with pkgs; [
+    qgis
     skypeforlinux
     spotify
+    libreoffice
     mu
     ncview
     netcdf # for ncdump utility
@@ -41,6 +64,8 @@ in rec {
   xdg.configFile."kitty/kitty.conf".text = ''
     # Load a theme
     include ${kitty-themes}/share/kitty-themes/Afterglow.conf
+
+    font_size 12.0
   '';
 
   home.file."/.ncviewrc".text = ''

@@ -5,7 +5,7 @@ let
   tmp-dir = "/tmp";
   pkg-dir = ./pkgs;
   config-dir = ./config;
-  next = pkgs.callPackage (pkg-dir + "/next") { };
+  # next = pkgs.callPackage (pkg-dir + "/next") { };
 in rec {
   home = {
     packages = with pkgs;
@@ -34,13 +34,13 @@ in rec {
         subversion
         haskellPackages.pandoc-citeproc
         #pass
+        okular
         unzip
         wget
         vim
         texlab # LSP server for latex
         # lua53Packages.digestif # LSP server for latex
         # kitty-themes
-        gmt
       ];
 
     sessionVariables = {
@@ -89,7 +89,7 @@ in rec {
     # Configuration files
     configHome = "${home-dir}/.config";
 
-    configFile."next".source = config-dir + "/next-cfg";
+    configFile."nyxt".source = config-dir + "/next-cfg";
     configFile."i3".source = config-dir + "/i3";
     configFile."i3status".source = config-dir + "/i3status";
 
