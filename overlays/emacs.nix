@@ -16,6 +16,7 @@ in {
       bbcode-mode
       company
       counsel
+      doct
       eglot
       ess
       evil
