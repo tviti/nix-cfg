@@ -24,7 +24,6 @@ in {
       gitFull
       gnupg
       lsof
-      pavucontrol
       pigz
       python3
       synergy

@@ -6,12 +6,12 @@ let
   nix-dir = "/Users/taylor/.config/nixpkgs";
   machine-dir = nix-dir + "/machines/R-Daneel";
   pkg-dir = nix-dir + "/pkgs";
-  yabai = pkgs.callPackage (pkg-dir + "/yabai") {
-    inherit (pkgs.darwin.apple_sdk.frameworks) Carbon Cocoa ScriptingBridge;
-  };
+  # yabai = pkgs.callPackage (pkg-dir + "/yabai") {
+  #   inherit (pkgs.darwin.apple_sdk.frameworks) Carbon Cocoa ScriptingBridge;
+  # };
 in {
   imports = [
-    (nix-dir + "/services/yabai.nix")
+    # (nix-dir + "/services/yabai.nix")
     (nix-dir + "/configuration-common.nix")
   ];
 
@@ -43,7 +43,7 @@ in {
   services.skhd.enable = true;
   services.yabai = {
     enable = true;
-    package = yabai;
+    package = pkgs.yabai;
   };
 
   services.synergy = {
