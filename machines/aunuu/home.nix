@@ -65,6 +65,8 @@ in rec {
     # Load a theme
     include ${kitty-themes}/share/kitty-themes/Afterglow.conf
 
+    enable_audio_bell no
+
     font_size 12.0
   '';
 
