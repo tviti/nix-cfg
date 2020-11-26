@@ -23,7 +23,7 @@ in rec {
         ledger
         myEmacs
         # myR
-        next
+        # next
         nix-direnv
         nixfmt # for emacs nix-mode
         nodePackages.bash-language-server
