@@ -96,6 +96,7 @@ in rec {
   '';
   
   services.syncthing.enable = true;
+  services.caffeine.enable = true;
 
   #
   # Email cfg
