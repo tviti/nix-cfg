@@ -23,7 +23,7 @@ in rec {
         ledger
         myEmacs
         # myR
-        next
+        # next
         nix-direnv
         nixfmt # for emacs nix-mode
         nodePackages.bash-language-server
@@ -34,7 +34,7 @@ in rec {
         subversion
         haskellPackages.pandoc-citeproc
         #pass
-        okular
+        # (stdenv.lib.optional stdenv.isLinux okular)
         unzip
         wget
         vim
