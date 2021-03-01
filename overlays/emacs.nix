@@ -21,7 +21,7 @@ in {
       ess
       evil
       evil-collection
-      evil-magit
+      # evil-magit
       evil-org
       elfeed
       # elpy
