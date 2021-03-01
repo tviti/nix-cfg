@@ -125,7 +125,7 @@ in {
 
     # Enable touchpad support.
     libinput.enable = true;
-    libinput.naturalScrolling = true;
+    libinput.touchpad.naturalScrolling = true;
 
     # Initial multi-monitor config. Ensures rotations occur before login prompt is displayed.
     xrandrHeads = [
