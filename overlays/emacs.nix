@@ -58,6 +58,7 @@ in {
       spacemacs-theme
       spaceline
       stan-mode
+      undo-tree
       which-key
       yasnippet
     ]);
