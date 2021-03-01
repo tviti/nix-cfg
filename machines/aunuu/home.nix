@@ -52,6 +52,7 @@ in rec {
     (nyxt "$HOME/Source/next")
   ] ++ (with pkgs; [
     qgis
+    googleearth
     skypeforlinux
     spotify
     libreoffice
