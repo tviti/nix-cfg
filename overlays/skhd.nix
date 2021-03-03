@@ -5,14 +5,17 @@
 
 self: super: {
 
-  skhd = super.skhd.overrideAttrs (oldAttrs: {
-    version = "a3dd7bf7dd5135ae567db7922216b4e09d51cae8";
+  skhd = super.skhd.overrideAttrs (oldAttrs: rec {
+    version = "b659b90576cf88100b52ca6ab9270d84af7e579b";
+
     src = super.fetchFromGitHub {
       owner = "koekeishiya";
       repo = "skhd";
-      rev = "a3dd7bf7dd5135ae567db7922216b4e09d51cae8";
-      sha256 = "15cnfca1fr2g4jgys9alhviys7n92h42hal9kqhqncmkxq2k64r7";
+      rev = version;
+      sha256 = "137v4xdpfjrzdp4vb5jkxa0ka8m30vdkqh701wki2l9xdmzgx7bg";
     };
+
+    buildInputs = oldAttrs.buildInputs ++ [ super.darwin.apple_sdk.frameworks.Cocoa ];
   });
 
 }
