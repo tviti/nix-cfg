@@ -35,7 +35,7 @@ in {
     nixpkgs.config.allowUnfree = true;
 
     fonts = {
-      enableFontDir = true;
+      fontDir.enable = true;
       fonts = with pkgs; [
         dejavu_fonts
         fira-code

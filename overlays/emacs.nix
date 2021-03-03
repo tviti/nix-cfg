@@ -21,7 +21,7 @@ in {
       ess
       evil
       evil-collection
-      evil-magit
+      # evil-magit
       evil-org
       elfeed
       # elpy
@@ -58,6 +58,7 @@ in {
       spacemacs-theme
       spaceline
       stan-mode
+      undo-tree
       which-key
       yasnippet
     ]);

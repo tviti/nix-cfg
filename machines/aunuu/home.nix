@@ -52,6 +52,7 @@ in rec {
     (nyxt "$HOME/Source/next")
   ] ++ (with pkgs; [
     qgis
+    googleearth
     skypeforlinux
     spotify
     libreoffice
@@ -96,6 +97,7 @@ in rec {
   '';
   
   services.syncthing.enable = true;
+  services.caffeine.enable = true;
 
   #
   # Email cfg
