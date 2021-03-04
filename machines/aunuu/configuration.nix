@@ -71,7 +71,7 @@ in {
     man-db
     pigz # Parallel version of gzip
     pinentry-qt
-    teamviewer
+    # teamviewer
     xclip
     gmt
   ];
@@ -88,7 +88,7 @@ in {
 
   # List services that you want to enable:
 
-  services.teamviewer.enable = true;
+  # services.teamviewer.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
