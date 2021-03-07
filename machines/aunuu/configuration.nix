@@ -93,6 +93,10 @@ in {
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  programs.ssh.forwardX11 = true;
+  programs.ssh.setXAuthLocation = true;
+  services.openssh.forwardX11 = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
