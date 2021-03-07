@@ -1,33 +1,50 @@
-{ python3Packages, fetchFromGitHub, installShellFiles }:
+{ python3Packages, fetchFromGitHub, installShellFiles, callPackage }:
 
 let
   # globus-cli reqs pin this at v0.9.4
   jmespath = python3Packages.jmespath.overrideAttrs(oldAttrs: rec {
-    version = "0.9.4";
+    version = "0.10.0";
     src = python3Packages.fetchPypi {
       inherit (oldAttrs) pname;
       inherit version;
-      sha256 = "bde2aef6f44302dfb30320115b17d030798de8c4110e28d5cf6cf91a7a31074c";
+      sha256 = "1yflbqggg1z9ndw9ps771hy36d07j9l2wwbj66lljqb6p1khapdq";
+    };
+  });
+  # requires v1.9.0
+  globus-sdk = python3Packages.globus-sdk.overrideAttrs(oldAttrs: rec {
+    version = "1.9.0";
+    src = fetchFromGitHub {
+      owner = "globus";
+      repo = "globus-sdk-python";
+      rev =  version;
+      sha256 = "1kqnr50iwcq9nx40lblbqzf327cdcbkrir6vh70067hk33rq0gm9";
     };
   });
 in python3Packages.buildPythonApplication rec {
   pname = "globus-cli";
-  version = "1.13.0";
+  version = "2.0.0";
 
   src = fetchFromGitHub {
     owner = "globus";
     repo = "globus-cli";
     rev = "${version}";
-    sha256 = "1njh4gfgqg5jl23rbnsrb44mapbrsypb0mpds77j2yj14fk48yx3"; 
+    sha256 = "1n5ysbrrzvhikvr5xn9sfws03km5xch50av9rng8ijxm54nj81gn"; 
   };
 
   doCheck = false;
 
+  # Override pin for cryptography, cause lazy
+  patchPhase = ''
+    substituteInPlace setup.py --replace \
+      "cryptography>=1.8.1,<3.4.0" "cryptography>=1.8.1,<=3.4.6"
+  '';
+  
   nativeBuildInputs = [ installShellFiles ];
-  propagatedBuildInputs = [ jmespath ] ++ (with python3Packages; [
+  propagatedBuildInputs = [ jmespath # cryptography
+                            globus-sdk ] ++ (with python3Packages; [
+                              cryptography
     configobj
     click
-    globus-sdk
     six
   ]);
 
