@@ -38,9 +38,11 @@ in {
     yabai
     #xquartz # NOTE: You should run $ xquartz-install after installation
     synergy
+    kitty
   ];
 
   services.skhd.enable = true;
+  services.skhd.skhdConfig = builtins.readFile "${nix-dir}/config/skhdrc";
   services.yabai = {
     enable = true;
     package = pkgs.yabai;

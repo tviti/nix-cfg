@@ -45,6 +45,6 @@ in rec {
     gpg.enable = true;
   };
 
-  xdg.configFile."skhd/skhdrc".source = config-dir + "/skhdrc";
+  #xdg.configFile."skhd/skhdrc".source = config-dir + "/skhdrc";
   xdg.configFile."yabai/yabairc".source = config-dir + "/yabairc";
 }
