@@ -37,6 +37,7 @@ in {
     fonts = {
       fontDir.enable = true;
       fonts = with pkgs; [
+        iosevka
         dejavu_fonts
         fira-code
         hack-font
