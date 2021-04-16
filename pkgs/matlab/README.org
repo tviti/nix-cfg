@@ -7,5 +7,19 @@ follow the instructions. When prompted for an install location, select a
 user-writable directory, and then edit ~version~ and ~runPath~ in =common.nix=
 to reflect your choice (the default is =$HOME/MATLAB/R2019b=).
 
+In order to get the documentation browser working in =R2020a=, I also had to
+exclude the following libraries from those shipped by MATLAB:
+
+- gio
+- glib
+- gthread
+- gobject
+- gmodule
+
+These libraries are found in =~/MATLAB/R2020a/cefclient/sys/os/glnxa64=. To
+exclude them, create a folder =Exclude= in that directory, and just move the
+associated shared-object files and symlinks into =Exclude=. When I was done, the
+only thing left was =libffi=.
+
 * Resources
   - https://github.com/jorsn/matlab-nix-imperative
