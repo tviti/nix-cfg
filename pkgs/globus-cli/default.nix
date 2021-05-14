@@ -10,15 +10,25 @@ let
       sha256 = "1yflbqggg1z9ndw9ps771hy36d07j9l2wwbj66lljqb6p1khapdq";
     };
   });
+  # globus_sdk req
+  pyjwt = python3Packages.pyjwt.overrideAttrs(oldAttrs: rec {
+    version = "1.7.1";
+    src = python3Packages.fetchPypi {
+      inherit (oldAttrs) pname;
+      inherit version;
+      sha256 = "15hflax5qkw1v6nssk1r0wkj83jgghskcmn875m3wgvpzdvajncd";
+    };
+  });
   # requires v1.9.0
-  globus-sdk = python3Packages.globus-sdk.overrideAttrs(oldAttrs: rec {
+  globus-sdk = python3Packages.globus-sdk.overridePythonAttrs(oldAttrs: rec {
     version = "1.9.0";
     src = fetchFromGitHub {
       owner = "globus";
       repo = "globus-sdk-python";
-      rev =  version;
+      rev = version;
       sha256 = "1kqnr50iwcq9nx40lblbqzf327cdcbkrir6vh70067hk33rq0gm9";
     };
+    propagatedBuildInputs = [ python3Packages.requests pyjwt ];
   });
 in python3Packages.buildPythonApplication rec {
   pname = "globus-cli";
@@ -36,17 +46,18 @@ in python3Packages.buildPythonApplication rec {
   # Override pin for cryptography, cause lazy
   patchPhase = ''
     substituteInPlace setup.py --replace \
-      "cryptography>=1.8.1,<3.4.0" "cryptography>=1.8.1,<=3.4.6"
+      "cryptography>=1.8.1,<3.4.0" "cryptography>=1.8.1"
   '';
   
-  nativeBuildInputs = [ installShellFiles ];
+  nativeBuildInputs = [ installShellFiles pyjwt ];
   propagatedBuildInputs = [ jmespath # cryptography
-                            globus-sdk ] ++ (with python3Packages; [
+                            globus-sdk
+                          ] ++ (with python3Packages; [
                               cryptography
-    configobj
-    click
-    six
-  ]);
+                              configobj
+                              click
+                              six
+                            ]);
 
   postPatch = ''
     sed -i '1d' shell_completion/{bash,zsh}_complete.sh
