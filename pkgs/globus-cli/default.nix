@@ -11,25 +11,24 @@ let
     };
   });
   # globus_sdk req
-  pyjwt = python3Packages.pyjwt.overrideAttrs(oldAttrs: rec {
-    version = "1.7.1";
-    src = python3Packages.fetchPypi {
-      inherit (oldAttrs) pname;
-      inherit version;
-      sha256 = "15hflax5qkw1v6nssk1r0wkj83jgghskcmn875m3wgvpzdvajncd";
-    };
-  });
-  # requires v1.9.0
-  globus-sdk = python3Packages.globus-sdk.overridePythonAttrs(oldAttrs: rec {
-    version = "1.9.0";
-    src = fetchFromGitHub {
-      owner = "globus";
-      repo = "globus-sdk-python";
-      rev = version;
-      sha256 = "1kqnr50iwcq9nx40lblbqzf327cdcbkrir6vh70067hk33rq0gm9";
-    };
-    propagatedBuildInputs = [ python3Packages.requests pyjwt ];
-  });
+  # pyjwt = python3Packages.pyjwt.overridePythonAttrs(oldAttrs: rec {
+  #   version = "1.7.1";
+  #   src = oldAttrs.src.override {
+  #     inherit version;
+  #     sha256 = "15hflax5qkw1v6nssk1r0wkj83jgghskcmn875m3wgvpzdvajncd";
+  #   };
+  # });
+  # # requires v1.9.0
+  # globus-sdk = python3Packages.globus-sdk.overridePythonAttrs(oldAttrs: rec {
+  #   version = "1.9.0";
+  #   src = fetchFromGitHub {
+  #     owner = "globus";
+  #     repo = "globus-sdk-python";
+  #     rev = version;
+  #     sha256 = "1kqnr50iwcq9nx40lblbqzf327cdcbkrir6vh70067hk33rq0gm9";
+  #   };
+  #   propagatedBuildInputs = [ python3Packages.requests pyjwt ];
+  # });
 in python3Packages.buildPythonApplication rec {
   pname = "globus-cli";
   version = "2.0.0";
@@ -49,10 +48,11 @@ in python3Packages.buildPythonApplication rec {
       "cryptography>=1.8.1,<3.4.0" "cryptography>=1.8.1"
   '';
   
-  nativeBuildInputs = [ installShellFiles pyjwt ];
+  nativeBuildInputs = [ installShellFiles ];
   propagatedBuildInputs = [ jmespath # cryptography
-                            globus-sdk
+                            # globus-sdk
                           ] ++ (with python3Packages; [
+                            globus-sdk
                               cryptography
                               configobj
                               click
