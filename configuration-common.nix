@@ -21,32 +21,33 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      gitFull
-      gnupg
-      lsof
-      pigz
-      python3
-      synergy
-      vim
-      wget
+      myEmacs
+#      gitFull
+#      gnupg
+#      lsof
+#      pigz
+#      python3
+#      synergy
+#      vim
+#      wget
     ];
 
-    # Needed for synergy
+    # Needed for synergy and zoom
     nixpkgs.config.allowUnfree = true;
-
     fonts = {
-      enableFontDir = true;
+      fontDir.enable = true;
       fonts = with pkgs; [
         dejavu_fonts
         fira-code
         hack-font
         inconsolata
         source-code-pro
+        iosevka
       ];
     };
 
-    programs.gnupg.agent = {
-      enable = true;
-    };
+#    programs.gnupg.agent = {
+#      enable = true;
+#    };
   };
 }
