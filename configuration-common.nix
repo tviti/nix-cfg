@@ -26,7 +26,7 @@ in {
       lsof
       pigz
       python3
-      synergy
+      #synergy
       vim
       wget
     ];
@@ -35,18 +35,19 @@ in {
     nixpkgs.config.allowUnfree = true;
 
     fonts = {
-      enableFontDir = true;
+      fontDir.enable = true;
       fonts = with pkgs; [
         dejavu_fonts
         fira-code
         hack-font
         inconsolata
         source-code-pro
+        iosevka
       ];
     };
 
-    programs.gnupg.agent = {
-      enable = true;
-    };
+    # programs.gnupg.agent = {
+    #   enable = true;
+    # };
   };
 }

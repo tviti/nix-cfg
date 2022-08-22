@@ -3,9 +3,10 @@
 self: super:
 let
   # Use emacs-macport on Darwin systems
-  package = if super.stdenv.isDarwin then super.emacsMacport else (super.emacs.override {
-    imagemagick = super.imagemagickBig;
-  });
+  # package = if super.stdenv.isDarwin then super.emacsMacport else (super.emacs.override {
+  #   imagemagick = super.imagemagickBig;
+  # });
+  package = super.emacsNativeComp;
   customEmacsPackages =
     super.emacsPackages.overrideScope' (self: super: { emacs = package; });
 in {
@@ -57,7 +58,7 @@ in {
       slime
       spacemacs-theme
       spaceline
-      stan-mode
+      # stan-mode
       undo-tree
       which-key
       yasnippet

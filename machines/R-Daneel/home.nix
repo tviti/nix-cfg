@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  nix-dir = "/Users/taylor/.config/nixpkgs";
+  nix-dir = "/Users/tviti/.config/nixpkgs";
   home_directory = builtins.getEnv "HOME";
   config-dir = ../../config;
 in rec {
