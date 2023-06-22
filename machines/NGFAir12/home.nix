@@ -55,6 +55,8 @@ in rec {
 
   # Make sure shells can find MATLAB
   home.sessionPath = [ "/Applications/MATLAB_R2022a.app/bin" ];
+
+  home.stateVersion = "22.11";
     
 
   #xdg.configFile."skhd/skhdrc".source = config-dir + "/skhdrc";

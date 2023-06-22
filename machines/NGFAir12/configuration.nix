@@ -76,8 +76,8 @@ in {
 
   # You should generally set this to the total number of logical cores in your system.
   # $ sysctl -n hw.ncpu
-  nix.maxJobs = "auto";
-  nix.buildCores = 0;
+  nix.settings.max-jobs = "auto";
+  nix.settings.cores = 0;
 
   #system.defaults = {
   #  NSGlobalDomain = {
