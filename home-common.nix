@@ -18,9 +18,9 @@ in rec {
 #        curl
         direnv
         gitFull
-        gitAndTools.git-annex
-#        gitAndTools.git-annex-remote-rclone
-#        ledger
+        # gitAndTools.git-annex
+        # gitAndTools.git-annex-remote-rclone
+        # ledger
         # myEmacs
         # myR
         # next

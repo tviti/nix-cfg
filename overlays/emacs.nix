@@ -6,7 +6,7 @@ let
   #package = if super.stdenv.isDarwin then super.emacsMacport else (super.emacs.override {
   #  imagemagick = super.imagemagickBig;
   #});
-  package = super.emacsUnstable;
+  package = super.emacs-unstable;
   customEmacsPackages =
     super.emacsPackages.overrideScope' (self: super: { emacs = package; });
 in {
